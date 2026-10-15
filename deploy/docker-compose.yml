@@ -1,0 +1,68 @@
+# Oriel + Caddy (HTTPS automatique Let's Encrypt).
+#
+#   cp .env.example .env    # puis renseigner DOMAIN et ACME_EMAIL
+#   docker compose up -d --build
+#
+# Toutes les données Oriel (SQLite + fichiers envoyés) sont dans le volume « oriel-data ».
+# Voir docs/DEPLOY.md.
+
+name: oriel
+
+services:
+  oriel:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: oriel:latest
+    restart: unless-stopped
+    init: true
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+      HOST: 0.0.0.0
+      PORT: "3000"
+      PUBLIC_URL: ${PUBLIC_URL:-https://${DOMAIN}}
+      TRUST_PROXY: "true"
+    volumes:
+      - oriel-data:/data
+    expose:
+      - "3000"
+    stop_grace_period: 20s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - oriel
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp" # HTTP/3
+    environment:
+      DOMAIN: ${DOMAIN:?Renseignez DOMAIN dans deploy/.env}
+      ACME_EMAIL: ${ACME_EMAIL:?Renseignez ACME_EMAIL dans deploy/.env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  oriel-data:
+  caddy-data:
+  caddy-config:

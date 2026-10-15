@@ -1,0 +1,27 @@
+# Caddy — reverse proxy HTTPS devant Oriel.
+# DOMAIN et ACME_EMAIL viennent de deploy/.env (transmis par docker-compose.yml).
+# Le certificat Let's Encrypt est obtenu et renouvelé automatiquement (ports 80 et 443 ouverts,
+# enregistrement DNS A/AAAA du domaine pointant vers ce serveur).
+
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN} {
+	encode zstd gzip
+
+	# Les WebSockets (/collab pour l'édition collaborative, /api/events pour les invalidations)
+	# traversent reverse_proxy sans configuration particulière.
+	reverse_proxy oriel:3000
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+	}
+
+	# Journal d'accès (docker compose logs caddy) : décommenter si besoin.
+	# log {
+	# 	output stdout
+	# 	format console
+	# }
+}
