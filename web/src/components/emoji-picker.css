@@ -1,0 +1,108 @@
+.emoji-picker {
+  display: flex;
+  flex-direction: column;
+  width: 352px;
+  max-width: calc(100vw - 24px);
+  height: 380px;
+}
+
+.emoji-picker__top {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 10px 6px;
+}
+.emoji-picker__search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: var(--text-tertiary);
+}
+.emoji-picker__search:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.emoji-picker__search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  outline: none;
+}
+
+.emoji-picker__tabs {
+  display: flex;
+  gap: 2px;
+  padding: 0 8px 4px;
+  border-bottom: 1px solid var(--divider);
+}
+.emoji-picker__tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+}
+.emoji-picker__tab:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+.emoji-picker__tab.is-active {
+  background: var(--bg-active);
+  color: var(--text);
+}
+
+.emoji-picker__label {
+  padding: 8px 12px 4px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.emoji-picker__grid {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  align-content: start;
+  gap: 1px;
+  padding: 0 8px 8px;
+}
+.emoji-picker__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+.emoji-picker__item:hover,
+.emoji-picker__item:focus-visible {
+  background: var(--bg-hover);
+}
+.emoji-picker__loading {
+  grid-column: 1 / -1;
+  padding: 24px;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: var(--fs-sm);
+}
