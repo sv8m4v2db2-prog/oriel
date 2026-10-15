@@ -1,0 +1,262 @@
+/* Advanced properties (vague G, session G3 — SPEC §5.9): permissions, formula warnings, verification,
+   related pages section, relation schema. */
+
+.ordb-access-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.ordb-formula-missing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--warning);
+  font-size: var(--fs-xs);
+}
+
+.ordb-rp-lock {
+  flex: none;
+  color: var(--text-tertiary);
+}
+
+/* Verification (D21) */
+.ordb-verif {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  line-height: 18px;
+}
+
+.ordb-verif.is-verified {
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 12%, transparent);
+}
+
+.ordb-verif.is-expired {
+  color: var(--warning);
+  background: color-mix(in srgb, var(--warning) 14%, transparent);
+}
+
+.ordb-verif-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 8px;
+}
+
+.ordb-verif-current .ordb-verif {
+  white-space: normal;
+}
+
+.ordb-verif-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ordb-verif-until {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: var(--fs-sm);
+}
+
+.ordb-verif-until label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ordb-verif-until input {
+  min-width: 0;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 4px;
+}
+
+/* Related pages sections of the row page (D31) */
+.ordb-related-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.ordb-related {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 8px 8px;
+}
+
+.ordb-related-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.ordb-related-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ordb-related-count {
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+}
+
+.ordb-related-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.ordb-related-add:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-related-empty {
+  padding: 4px 2px;
+  color: var(--text-tertiary);
+  font-size: var(--fs-sm);
+}
+
+.ordb-related-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 2px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ordb-related-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ordb-related-table-wrap {
+  overflow-x: auto;
+}
+
+.ordb-related-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+.ordb-related-table th,
+.ordb-related-table td {
+  max-width: 220px;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.ordb-related-table th {
+  color: var(--text-tertiary);
+  font-weight: 500;
+  font-size: var(--fs-xs);
+}
+
+.ordb-related-table td.is-numeric {
+  text-align: right;
+}
+
+.ordb-related-actions {
+  width: 28px;
+}
+
+/* Relation schema (D29) */
+.ordb-relgraph svg {
+  display: block;
+  margin: 0 auto;
+  max-height: 70vh;
+}
+
+.ordb-relgraph-empty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 4px;
+  color: var(--text-secondary);
+}
+
+.ordb-relgraph-edge path {
+  stroke: var(--border-strong);
+  stroke-width: 1.5;
+}
+
+.ordb-relgraph-edge path.is-two-way {
+  stroke: var(--accent);
+}
+
+.ordb-relgraph-arrowhead {
+  fill: var(--text-tertiary);
+}
+
+.ordb-relgraph-label {
+  fill: var(--text-secondary);
+  font-size: 11px;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 4px;
+}
+
+.ordb-relgraph-node {
+  cursor: pointer;
+}
+
+.ordb-relgraph-node rect {
+  fill: var(--bg);
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+
+.ordb-relgraph-node.is-center rect {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.ordb-relgraph-node text {
+  fill: var(--text);
+  font-size: 12.5px;
+}
+
+.ordb-relgraph-node:hover rect,
+.ordb-relgraph-node:focus-visible rect {
+  fill: var(--bg-hover);
+}
+
+.ordb-relgraph-node:focus-visible {
+  outline: none;
+}
