@@ -1,0 +1,166 @@
+/* Tab bar of an app window (local page, original Oriel design). Height must match TAB_BAR_HEIGHT. */
+:root {
+  color-scheme: light dark;
+  --bar-bg: #e9edf2;
+  --tab-bg: transparent;
+  --tab-hover: rgba(20, 32, 49, 0.07);
+  --tab-active: #ffffff;
+  --text: #142031;
+  --text-muted: #5a6879;
+  --border: #d5dce5;
+  --c-red: #e5484d;
+  --c-orange: #f76808;
+  --c-yellow: #e5b800;
+  --c-green: #30a46c;
+  --c-teal: #12a594;
+  --c-blue: #2f7de1;
+  --c-purple: #8e4ec6;
+  --c-pink: #d6409f;
+  --c-gray: #8b8d98;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bar-bg: #101216;
+    --tab-hover: rgba(255, 255, 255, 0.07);
+    --tab-active: #191a1e;
+    --text: #e6ebf1;
+    --text-muted: #98a4b3;
+    --border: #2a313b;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bar-bg);
+  color: var(--text);
+  font: 12.5px/1 -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.bar {
+  display: flex;
+  align-items: flex-end;
+  height: 40px;
+  padding: 0 8px 0 84px; /* room for the traffic lights */
+  border-bottom: 1px solid var(--border);
+  -webkit-app-region: drag;
+}
+.bar.is-fullscreen {
+  padding-left: 8px;
+}
+.tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 0;
+  flex: 0 1 auto;
+  height: 100%;
+  padding-top: 6px;
+}
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 1 190px;
+  min-width: 44px;
+  max-width: 220px;
+  height: 100%;
+  padding: 0 6px 0 10px;
+  border-radius: 8px 8px 0 0;
+  background: var(--tab-bg);
+  color: var(--text-muted);
+  -webkit-app-region: no-drag;
+  cursor: default;
+}
+.tab:hover {
+  background: var(--tab-hover);
+}
+.tab.is-active {
+  background: var(--tab-active);
+  color: var(--text);
+}
+.tab.is-dragging {
+  z-index: 2;
+  opacity: 0.85;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+.tab__color {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tab-color, transparent);
+  display: none;
+}
+.tab[data-color] .tab__color {
+  display: block;
+}
+.tab[data-color='red'] { --tab-color: var(--c-red); }
+.tab[data-color='orange'] { --tab-color: var(--c-orange); }
+.tab[data-color='yellow'] { --tab-color: var(--c-yellow); }
+.tab[data-color='green'] { --tab-color: var(--c-green); }
+.tab[data-color='teal'] { --tab-color: var(--c-teal); }
+.tab[data-color='blue'] { --tab-color: var(--c-blue); }
+.tab[data-color='purple'] { --tab-color: var(--c-purple); }
+.tab[data-color='pink'] { --tab-color: var(--c-pink); }
+.tab[data-color='gray'] { --tab-color: var(--c-gray); }
+.tab[data-color].is-active::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 0;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: var(--tab-color);
+}
+.tab__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tab.is-loading .tab__title {
+  opacity: 0.7;
+}
+.tab__close,
+.new {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 15px;
+  cursor: default;
+  -webkit-app-region: no-drag;
+}
+.tab__close {
+  opacity: 0;
+}
+.tab:hover .tab__close,
+.tab.is-active .tab__close {
+  opacity: 0.7;
+}
+.tab__close:hover,
+.new:hover {
+  background: var(--tab-hover);
+  opacity: 1;
+}
+.new {
+  margin: 0 0 6px 4px;
+  color: var(--text-muted);
+  font-size: 18px;
+}
