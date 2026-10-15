@@ -1,0 +1,81 @@
+/* Journal quotidien (wave H3). */
+.journal__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 20px 0 12px;
+}
+.journal__month {
+  margin: 0 6px;
+  min-width: 150px;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.journal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+}
+.journal__weekday {
+  padding: 4px 0;
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+.journal__day {
+  position: relative;
+  aspect-ratio: 1 / 0.8;
+  min-height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-md);
+  cursor: pointer;
+}
+.journal__day:hover:not(:disabled) {
+  background: var(--bg-hover);
+}
+.journal__day:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+.journal__day.is-outside {
+  color: var(--text-tertiary);
+  background: transparent;
+}
+.journal__day.has-entry {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.journal__day.has-entry::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.journal__day.is-today {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.journal__template {
+  margin-top: 28px;
+}
+.journal__h {
+  margin: 0 0 4px;
+  font-size: var(--fs-base);
+}
+@media (max-width: 520px) {
+  .journal__day {
+    min-height: 34px;
+  }
+}

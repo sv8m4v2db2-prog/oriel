@@ -1,0 +1,705 @@
+/*
+ * Feed, chart and dashboard views. Design tokens of styles/theme.css only, plus the chart palette
+ * below: 8 categorical slots in a fixed order (validated for color-vision deficiencies, stepped
+ * separately for the dark theme) and one saturated fill per option color.
+ */
+:root {
+  --chart-1: #2a78d6;
+  --chart-2: #eb6834;
+  --chart-3: #1baf7a;
+  --chart-4: #eda100;
+  --chart-5: #e87ba4;
+  --chart-6: #008300;
+  --chart-7: #4a3aa7;
+  --chart-8: #e34948;
+  --chart-opt-default: #a3a29e;
+  --chart-opt-gray: #8c8b88;
+  --chart-opt-brown: #a0705a;
+  --chart-opt-orange: #eb6834;
+  --chart-opt-yellow: #eda100;
+  --chart-opt-green: #2e9a5c;
+  --chart-opt-blue: #2a78d6;
+  --chart-opt-purple: #7d5cc6;
+  --chart-opt-pink: #e06c98;
+  --chart-opt-red: #e34948;
+  --chart-surface: var(--bg);
+}
+
+:root[data-theme='dark'] {
+  --chart-1: #3987e5;
+  --chart-2: #d95926;
+  --chart-3: #199e70;
+  --chart-4: #c98500;
+  --chart-5: #d55181;
+  --chart-6: #008300;
+  --chart-7: #9085e9;
+  --chart-8: #e66767;
+  --chart-opt-default: #6f6e6a;
+  --chart-opt-gray: #8a8985;
+  --chart-opt-brown: #ad7b64;
+  --chart-opt-orange: #d95926;
+  --chart-opt-yellow: #c98500;
+  --chart-opt-green: #2f9e64;
+  --chart-opt-blue: #3987e5;
+  --chart-opt-purple: #9085e9;
+  --chart-opt-pink: #d55181;
+  --chart-opt-red: #e66767;
+}
+
+/* ---------------------------------------------------------------------------------------------
+ * Charts
+ * ------------------------------------------------------------------------------------------- */
+
+.ordb-chart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.ordb-chart.has-side-legend {
+  flex-direction: row;
+  align-items: center;
+}
+
+.ordb-chart-plot {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.ordb-chart-plot.is-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ordb-chart-plot.is-clickable .ordb-chart-hit,
+.ordb-chart-plot.is-clickable .is-slice {
+  cursor: pointer;
+}
+
+.ordb-chart-svg {
+  display: block;
+  overflow: visible;
+  font-family: var(--font-sans);
+}
+
+.ordb-chart-loading {
+  height: 100%;
+  min-height: 120px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--bg-subtle) 0%, var(--bg-hover) 50%, var(--bg-subtle) 100%);
+  background-size: 200% 100%;
+  animation: ordb-shimmer 1.4s ease-in-out infinite;
+}
+
+.ordb-chart-empty,
+.ordb-widget-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 60px;
+  padding: 8px;
+  color: var(--text-tertiary);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.ordb-chart-grid {
+  stroke: var(--divider);
+  stroke-width: 1;
+}
+
+.ordb-chart-zero {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+
+.ordb-chart-tick {
+  fill: var(--text-tertiary);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.ordb-chart-catlabel {
+  fill: var(--text-secondary);
+  font-size: var(--fs-xs);
+}
+
+.ordb-chart-value {
+  fill: var(--text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+
+.ordb-chart-mark {
+  transition: opacity 120ms ease;
+}
+
+.ordb-chart-mark.is-stacked,
+.ordb-chart-mark.is-slice {
+  stroke: var(--chart-surface);
+  stroke-width: 2px;
+}
+
+.ordb-chart-mark.is-dimmed,
+.ordb-chart-point.is-dimmed {
+  opacity: 0.3;
+}
+
+.ordb-chart-hit {
+  fill: transparent;
+}
+
+.ordb-chart-line {
+  fill: none;
+  stroke-width: 2px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.ordb-chart-area {
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.ordb-chart-point {
+  stroke: var(--chart-surface);
+  stroke-width: 2px;
+  pointer-events: none;
+}
+
+.ordb-chart-crosshair {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  pointer-events: none;
+}
+
+.ordb-chart-slice-label {
+  fill: #fff;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.ordb-chart-donut-total {
+  fill: var(--text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ordb-chart-donut-empty {
+  fill: none;
+  stroke: var(--bg-subtle);
+}
+
+.ordb-chart-tooltip {
+  position: absolute;
+  z-index: 5;
+  min-width: 140px;
+  max-width: 260px;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-md);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  pointer-events: none;
+}
+
+.ordb-chart-tooltip-title {
+  margin-bottom: 4px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.ordb-chart-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  line-height: 1.6;
+}
+
+.ordb-chart-tooltip-row.is-total {
+  margin-top: 2px;
+  padding-top: 2px;
+  border-top: 1px solid var(--divider);
+}
+
+.ordb-chart-tooltip-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-chart-tooltip-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ordb-chart-tooltip-foot {
+  margin-top: 2px;
+  color: var(--text-tertiary);
+}
+
+.ordb-chart-swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.ordb-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-xs);
+}
+
+.ordb-chart-legend.is-vertical {
+  flex: none;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  max-width: 45%;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.ordb-chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--text-secondary);
+}
+
+.ordb-chart-legend-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-chart-legend-detail {
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ordb-chart.is-number {
+  align-items: center;
+  justify-content: center;
+}
+
+.ordb-chart-number-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 60px;
+}
+
+.ordb-chart-number {
+  color: var(--text);
+  font-size: 56px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.ordb-chart-number-caption {
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.ordb-chart-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Chart views */
+
+.ordb-chartview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0 4px;
+}
+
+.ordb-chartview-plot {
+  height: 380px;
+}
+
+.ordb-chartview-plot.is-number {
+  height: 220px;
+}
+
+.ordb-root.is-inline .ordb-chartview-plot {
+  height: 300px;
+}
+
+.ordb-chart-rows {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+}
+
+.ordb-chart-rows-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 10px;
+  border-bottom: 1px solid var(--divider);
+  font-size: var(--fs-sm);
+}
+
+.ordb-chart-rows-title {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-chart-rows-count {
+  flex: 1;
+  color: var(--text-tertiary);
+}
+
+.ordb-chart-rows-list,
+.ordb-widget-list {
+  max-height: 260px;
+  margin: 0;
+  padding: 4px;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.ordb-chart-row,
+.ordb-widget-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  padding: 5px 6px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ordb-chart-row:hover,
+.ordb-widget-row:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-widget-row .ordb-row-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.ordb-widget-row-value {
+  flex: none;
+  max-width: 45%;
+  overflow: hidden;
+  color: var(--text-secondary);
+}
+
+/* ---------------------------------------------------------------------------------------------
+ * Feed
+ * ------------------------------------------------------------------------------------------- */
+
+.ordb-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 680px;
+  padding: 10px 0;
+}
+
+.ordb-feed-post {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 80ms ease;
+}
+
+.ordb-feed-post:hover {
+  background: var(--bg-subtle);
+}
+
+.ordb-feed-post:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ordb-feed-cover {
+  height: 140px;
+  margin: -14px -16px 2px;
+}
+
+.ordb-feed-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: var(--fs-sm);
+}
+
+.ordb-feed-author {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-feed-date {
+  flex: none;
+  color: var(--text-tertiary);
+}
+
+.ordb-feed-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.ordb-feed-title .is-empty {
+  color: var(--text-tertiary);
+}
+
+.ordb-feed-preview {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+}
+
+.ordb-feed-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+}
+
+.ordb-feed .ordb-add-row {
+  align-self: flex-start;
+}
+
+/* ---------------------------------------------------------------------------------------------
+ * Dashboard
+ * ------------------------------------------------------------------------------------------- */
+
+.ordb-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.ordb-dashboard-grid {
+  display: grid;
+  grid-auto-rows: 150px;
+  gap: 12px;
+}
+
+.ordb-widget {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+}
+
+.ordb-widget.is-dragging {
+  box-shadow: var(--shadow-lg);
+}
+
+.ordb-widget-head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 4px 6px 0 12px;
+  font-size: var(--fs-sm);
+}
+
+.ordb-widget-grip {
+  display: inline-flex;
+  margin-left: -8px;
+  color: var(--text-tertiary);
+  cursor: grab;
+  touch-action: none;
+}
+
+.ordb-widget-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-widget-badge {
+  flex: none;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-xs);
+}
+
+.ordb-widget-menu {
+  opacity: 0;
+}
+
+.ordb-widget:hover .ordb-widget-menu,
+.ordb-widget-menu:focus-visible,
+.ordb-widget-menu[aria-expanded='true'] {
+  opacity: 1;
+}
+
+.ordb-widget-body {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 4px 12px 10px;
+}
+
+.ordb-widget.is-list .ordb-widget-body {
+  padding: 0 4px 4px;
+}
+
+.ordb-widget-list {
+  max-height: none;
+  flex: 1;
+}
+
+.ordb-widget-chart {
+  flex: 1;
+  min-height: 0;
+}
+
+.ordb-widget-drill {
+  position: absolute;
+  inset: 4px 8px 8px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+}
+
+.ordb-widget-drill .ordb-chart-rows {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  box-shadow: var(--shadow-md);
+}
+
+.ordb-widget-drill .ordb-chart-rows-list {
+  flex: 1;
+  max-height: none;
+}
+
+.ordb-widget-add {
+  align-self: flex-start;
+}
+
+.ordb-widget-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ordb-widget-editor .ordb-field-row .ordb-input {
+  max-width: 260px;
+  width: 100%;
+}
+
+.ordb-widget-filter {
+  padding: 4px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.ordb-widget-editor-foot {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (hover: none) {
+  .ordb-widget-menu {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .ordb-chartview-plot {
+    height: 300px;
+  }
+  .ordb-feed-post {
+    padding: 12px;
+  }
+  .ordb-feed-cover {
+    margin: -12px -12px 2px;
+  }
+  .ordb-dashboard-grid {
+    grid-auto-rows: 140px;
+  }
+}

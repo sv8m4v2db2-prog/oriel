@@ -1,0 +1,3944 @@
+/*
+ * Oriel — database module styles.
+ * Uses only the design tokens of styles/theme.css (light & dark) and the .tag[data-color] helper.
+ * Every class is prefixed with `ordb-` (dropdowns are rendered in portals, outside .ordb-root).
+ */
+
+/* ------------------------------------------------------------------------------------------
+ * Root, top bar, tabs, toolbar
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-root {
+  --ordb-row-h: 34px;
+  position: relative;
+  min-width: 0;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+}
+
+.ordb-root.is-inline {
+  margin: 6px 0 14px;
+}
+
+.ordb-inline-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.ordb-inline-icon {
+  font-size: 20px;
+}
+
+.ordb-inline-head .ordb-inline-title {
+  flex: 1;
+  height: auto;
+  border-radius: var(--radius-sm);
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 2px 0;
+  outline: none;
+}
+
+.ordb-inline-head .ordb-inline-title:hover:not(.is-static) {
+  background: var(--bg-hover);
+}
+
+.ordb-inline-title::placeholder {
+  color: var(--text-tertiary);
+}
+
+.ordb-inline-title.is-static {
+  display: block;
+}
+
+.ordb-inline-open {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+
+.ordb-inline-head:hover .ordb-inline-open,
+.ordb-inline-open:focus-visible {
+  opacity: 1;
+}
+
+.ordb-topbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 40px;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 4px;
+}
+
+.ordb-tabs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  /* Basis = all tabs: when tabs + toolbar don't fit, the toolbar wraps onto its own line. */
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ordb-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ordb-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  height: 32px;
+  padding: 0 8px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ordb-tab:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.ordb-tab.is-active {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.ordb-tab.is-active::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: -5px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+}
+
+.ordb-tab-name {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ordb-tab-chevron {
+  color: var(--text-tertiary);
+}
+
+.ordb-tab-add {
+  flex: none;
+}
+
+.ordb-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+  margin-left: auto;
+}
+
+.ordb-toolbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 28px;
+  padding: 0 7px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ordb-toolbtn:hover,
+.ordb-toolbtn.is-active {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.ordb-toolbtn.has-count {
+  color: var(--accent);
+}
+
+.ordb-toolbtn-count {
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  text-align: center;
+}
+
+.ordb-new-btn {
+  margin-left: 6px;
+}
+
+.ordb-search {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+}
+
+.ordb-search.is-open {
+  background: var(--bg-hover);
+}
+
+.ordb-search-input {
+  width: 150px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  outline: none;
+}
+
+.ordb-search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.ordb-view {
+  position: relative;
+  min-width: 0;
+}
+
+.ordb-notice {
+  margin: 4px 0;
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.ordb-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: var(--fs-sm);
+}
+
+.ordb-error > span {
+  flex: 1;
+}
+
+.ordb-skeleton {
+  height: 30px;
+  margin: 8px 0;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--bg-subtle) 0%, var(--bg-hover) 50%, var(--bg-subtle) 100%);
+  background-size: 200% 100%;
+  animation: ordb-shimmer 1.4s ease-in-out infinite;
+}
+
+.ordb-skeleton.is-short {
+  width: 60%;
+}
+
+@keyframes ordb-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.ordb-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 18px 12px;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.ordb-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ordb-more {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Generic controls
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ordb-btn.is-md {
+  height: 32px;
+  padding: 0 12px;
+  font-size: var(--fs-md);
+}
+
+.ordb-btn.is-sm {
+  height: 28px;
+  padding: 0 10px;
+  font-size: var(--fs-sm);
+}
+
+.ordb-btn.is-ghost:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-btn.is-outline {
+  border-color: var(--border-strong);
+  background: var(--bg-input);
+}
+
+.ordb-btn.is-outline:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-btn.is-primary {
+  background: var(--accent);
+  color: var(--text-on-accent);
+}
+
+.ordb-btn.is-primary:hover {
+  background: var(--accent-hover);
+}
+
+.ordb-btn.is-danger {
+  background: var(--danger);
+  color: var(--text-on-accent);
+}
+
+.ordb-btn.is-danger:hover {
+  filter: brightness(1.06);
+}
+
+.ordb-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ordb-btn:focus-visible,
+.ordb-iconbtn:focus-visible,
+.ordb-toolbtn:focus-visible,
+.ordb-tab:focus-visible,
+.ordb-menuitem:focus-visible,
+.ordb-card:focus-visible,
+.ordb-list-row:focus-visible,
+.ordb-cell:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.ordb-full {
+  width: 100%;
+}
+
+.ordb-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.ordb-iconbtn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.ordb-iconbtn.is-active {
+  color: var(--text);
+}
+
+.ordb-iconbtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ordb-linkbtn {
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.ordb-linkbtn:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+}
+
+.ordb-input {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  outline: none;
+}
+
+.ordb-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.ordb-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.ordb-input.is-bare {
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ordb-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.ordb-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  max-width: 100%;
+  height: 28px;
+  padding: 0 24px 0 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.ordb-select select:hover {
+  border-color: var(--border-strong);
+}
+
+.ordb-select select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.ordb-select select option {
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+
+.ordb-select > svg {
+  position: absolute;
+  right: 7px;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.ordb-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 2px;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.ordb-toggle.is-disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ordb-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.ordb-toggle-track {
+  position: relative;
+  flex: none;
+  width: 28px;
+  height: 16px;
+  border-radius: 8px;
+  background: var(--border-strong);
+  transition: background 120ms ease;
+}
+
+.ordb-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+  transition: transform 120ms ease;
+}
+
+.ordb-toggle input:checked + .ordb-toggle-track {
+  background: var(--accent);
+}
+
+.ordb-toggle input:checked + .ordb-toggle-track .ordb-toggle-thumb {
+  transform: translateX(12px);
+}
+
+.ordb-toggle input:focus-visible + .ordb-toggle-track {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ordb-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 4px;
+  background: var(--bg-input);
+  color: var(--text-on-accent);
+  cursor: pointer;
+}
+
+.ordb-checkbox:hover:not(:disabled) {
+  border-color: var(--text-tertiary);
+}
+
+.ordb-checkbox.is-checked,
+.ordb-checkbox.is-mixed {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.ordb-checkbox:disabled {
+  cursor: default;
+}
+
+.ordb-checkbox-dash {
+  width: 8px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--text-on-accent);
+}
+
+.ordb-grip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 16px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: grab;
+  touch-action: none;
+}
+
+.ordb-grip:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.ordb-grip-placeholder {
+  flex: none;
+  width: 16px;
+}
+
+.ordb-muted {
+  color: var(--text-tertiary);
+}
+
+.ordb-small {
+  font-size: var(--fs-xs);
+}
+
+.ordb-ellipsis {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-emoji {
+  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+  line-height: 1;
+}
+
+.ordb-spin {
+  animation: ordb-spin 0.9s linear infinite;
+}
+
+@keyframes ordb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ordb-popover-target {
+  display: inline-flex;
+}
+
+body.ordb-resizing,
+body.ordb-resizing * {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Tags, avatars, values
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-tag {
+  flex: none;
+  max-width: 100%;
+}
+
+.ordb-tag-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ordb-tag-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-right: -3px;
+  padding: 0;
+  border: none;
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.ordb-tag-remove:hover {
+  opacity: 1;
+  background: var(--bg-active);
+}
+
+.ordb-status-dot {
+  flex: none;
+}
+
+.ordb-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  padding: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.ordb-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ordb-user-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-value {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ordb-value.is-nowrap {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-value.is-wrap {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.ordb-value.is-number,
+.ordb-value.is-numeric,
+.ordb-value.is-unique_id {
+  font-variant-numeric: tabular-nums;
+}
+
+.ordb-value.is-checkbox {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ordb-taglist {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ordb-taglist.is-nowrap {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.ordb-taglist.is-wrap {
+  flex-wrap: wrap;
+  white-space: normal;
+}
+
+.ordb-link {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 2px;
+}
+
+.ordb-link:hover {
+  text-decoration-color: var(--text);
+}
+
+.ordb-file-chip,
+.ordb-relation-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: none;
+  max-width: 220px;
+  height: 22px;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ordb-file-chip span,
+.ordb-relation-chip span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-relation-chip span:last-child {
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 2px;
+}
+
+.ordb-file-chip:hover,
+.ordb-relation-chip:hover {
+  background: var(--bg-active);
+}
+
+/* I2: values of a list formula result (pages and people use their own chips). */
+.ordb-formula-chip {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  max-width: 220px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-formula-chip.is-numeric {
+  font-variant-numeric: tabular-nums;
+}
+
+.ordb-formula-chip.is-more {
+  color: var(--text-secondary);
+}
+
+.ordb-file-thumb {
+  width: 100%;
+  max-height: 120px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.ordb-empty {
+  color: var(--text-tertiary);
+}
+
+.ordb-prop-icon {
+  flex: none;
+  color: var(--text-tertiary);
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Dropdowns & menu panels (portaled)
+ * ---------------------------------------------------------------------------------------- */
+
+div.ordb-dropdown {
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  color: var(--text);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  max-height: min(560px, calc(100vh - 40px));
+  overflow-y: auto;
+}
+
+div.ordb-mantine-menu {
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-lg);
+}
+
+.ordb-menuitem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 30px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ordb-menuitem:hover:not(:disabled),
+.ordb-menuitem.is-active {
+  background: var(--bg-hover);
+}
+
+.ordb-menuitem:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.ordb-menuitem.is-danger {
+  color: var(--danger);
+}
+
+.ordb-menuitem.is-danger:hover:not(:disabled) {
+  background: var(--danger-soft);
+}
+
+.ordb-menuitem-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 16px;
+  color: var(--text-secondary);
+}
+
+.ordb-menuitem.is-danger .ordb-menuitem-icon {
+  color: inherit;
+}
+
+.ordb-menuitem-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-menuitem-right {
+  flex: none;
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-tertiary);
+}
+
+.ordb-menuitem-chevron {
+  flex: none;
+  color: var(--text-tertiary);
+}
+
+.ordb-menu-divider {
+  height: 1px;
+  margin: 6px -6px;
+  background: var(--divider);
+}
+
+.ordb-menu-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 4px;
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.ordb-menu-hint {
+  padding: 4px 8px;
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+}
+
+.ordb-menu-empty {
+  padding: 8px;
+  color: var(--text-tertiary);
+  font-size: var(--fs-sm);
+}
+
+.ordb-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 2px 6px;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 6px;
+}
+
+.ordb-panel-title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+.ordb-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px 4px;
+}
+
+.ordb-field-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: var(--fs-sm);
+}
+
+.ordb-field-row > span:first-child {
+  flex: none;
+  color: var(--text-secondary);
+}
+
+.ordb-field-row .ordb-input {
+  max-width: 140px;
+}
+
+.ordb-warning {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+}
+
+.ordb-warning > svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--warning);
+}
+
+.ordb-confirm-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.ordb-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ordb-confirm-message {
+  color: var(--text-secondary);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+}
+
+.ordb-inline-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px 8px;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.ordb-inline-confirm > div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.ordb-type-list,
+.ordb-options-list,
+.ordb-color-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ordb-options-list {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.ordb-swatch {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid var(--divider);
+}
+
+.ordb-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 2px 4px 4px;
+}
+
+.ordb-layout-choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-xs);
+  cursor: pointer;
+}
+
+.ordb-layout-choice:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.ordb-layout-choice.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.ordb-layout-check {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  color: var(--accent);
+}
+
+.ordb-layout-options {
+  gap: 8px;
+}
+
+/* Option picker ---------------------------------------------------------------------------- */
+
+.ordb-options-editor,
+.ordb-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ordb-token-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 4px 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  cursor: text;
+}
+
+.ordb-token-field:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.ordb-token {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  max-width: 100%;
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  font-size: var(--fs-sm);
+}
+
+.ordb-token-input {
+  flex: 1;
+  min-width: 80px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  outline: none;
+}
+
+.ordb-token-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.ordb-option-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 30px;
+  padding: 3px 4px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ordb-option-row.is-highlighted,
+.ordb-option-row:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-option-row.is-create {
+  color: var(--text-secondary);
+  padding-left: 8px;
+}
+
+.ordb-option-spacer {
+  flex: 1;
+}
+
+.ordb-option-check {
+  flex: none;
+  color: var(--accent);
+}
+
+.ordb-option-more {
+  opacity: 0;
+}
+
+.ordb-option-row:hover .ordb-option-more,
+.ordb-option-row.is-highlighted .ordb-option-more,
+.ordb-option-more:focus-visible {
+  opacity: 1;
+}
+
+.ordb-person-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.25;
+}
+
+.ordb-person-text > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-person-text .ordb-muted {
+  font-size: var(--fs-xs);
+}
+
+.ordb-picker-search {
+  margin-bottom: 4px;
+}
+
+/* Files ------------------------------------------------------------------------------------ */
+
+.ordb-file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ordb-file-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+}
+
+.ordb-file-row:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-file-mini {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.ordb-file-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.ordb-file-name:hover {
+  text-decoration: underline;
+}
+
+.ordb-link-add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Date picker ------------------------------------------------------------------------------ */
+
+.ordb-date-editor {
+  display: flex;
+  flex-direction: column;
+}
+
+.ordb-date-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 2px 2px 8px;
+}
+
+.ordb-date-field {
+  display: flex;
+  gap: 6px;
+}
+
+.ordb-date-field.is-active .ordb-input {
+  border-color: var(--accent);
+}
+
+.ordb-time-input {
+  flex: 0 0 72px;
+}
+
+.ordb-cal-head {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 2px 4px;
+}
+
+.ordb-cal-title {
+  flex: 1;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.ordb-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  padding: 0 2px 4px;
+}
+
+.ordb-cal-weekday {
+  padding: 4px 0;
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+  text-align: center;
+}
+
+.ordb-cal-day {
+  height: 30px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.ordb-cal-day:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-cal-day.is-outside {
+  color: var(--text-tertiary);
+}
+
+.ordb-cal-day.is-today {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ordb-cal-day.is-in-range {
+  border-radius: 0;
+  background: var(--accent-soft);
+}
+
+.ordb-cal-day.is-selected {
+  background: var(--accent);
+  color: var(--text-on-accent);
+}
+
+/* Formula editor --------------------------------------------------------------------------- */
+
+/* I2: autocompletion under the expression, function groups in the help list. */
+.ordb-formula-suggest {
+  display: flex;
+  flex-direction: column;
+  margin-top: -6px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated, var(--bg));
+  box-shadow: var(--shadow-md, 0 4px 12px rgb(0 0 0 / 12%));
+}
+
+.ordb-formula-suggest-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ordb-formula-suggest-item.is-active,
+.ordb-formula-suggest-item:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-formula-suggest-item code {
+  flex: none;
+  font-family: var(--font-mono);
+}
+
+.ordb-formula-suggest-item .ordb-muted {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-formula-group + .ordb-formula-group {
+  margin-top: 6px;
+}
+
+.ordb-formula-group-label {
+  padding: 4px 6px 2px;
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.ordb-formula {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ordb-formula-input {
+  width: 100%;
+  min-height: 92px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+}
+
+.ordb-formula-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.ordb-formula-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 20px;
+  color: var(--success);
+  font-size: var(--fs-sm);
+}
+
+.ordb-formula-status.is-error {
+  color: var(--danger);
+}
+
+.ordb-formula-help {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 12px;
+}
+
+.ordb-formula-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px;
+}
+
+.ordb-formula-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ordb-formula-item:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-formula-item.is-fn {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.ordb-formula-item code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+}
+
+.ordb-formula-item.is-fn .ordb-muted {
+  font-size: var(--fs-xs);
+}
+
+/* Filters & sorts -------------------------------------------------------------------------- */
+
+.ordb-filter-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 4px;
+}
+
+.ordb-filter-rule {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 1.4fr) 26px;
+  align-items: center;
+  gap: 6px;
+}
+
+.ordb-filter-rule .ordb-select,
+.ordb-filter-rule .ordb-select select {
+  width: 100%;
+}
+
+.ordb-filter-conj {
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  text-align: right;
+}
+
+.ordb-filter-value {
+  min-width: 0;
+}
+
+.ordb-filter-value .ordb-input {
+  height: 28px;
+}
+
+.ordb-filter-date {
+  display: flex;
+  gap: 4px;
+}
+
+.ordb-sort-menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.ordb-sort-rule {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) 120px 26px;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 4px;
+}
+
+.ordb-sort-rule .ordb-select,
+.ordb-sort-rule .ordb-select select {
+  width: 100%;
+}
+
+.ordb-group-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ordb-prop-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 2px 4px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  background: var(--bg-elevated);
+}
+
+.ordb-prop-row:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-props-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 4px;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Cells
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-cell {
+  position: relative;
+  min-width: 0;
+  outline: none;
+}
+
+.ordb-cell.is-table {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  min-height: calc(var(--ordb-row-h) - 1px);
+  padding: 7px 8px;
+  line-height: 19px;
+  overflow: hidden;
+}
+
+.ordb-cell.is-table.is-editable {
+  cursor: pointer;
+}
+
+.ordb-cell.is-table > .ordb-value {
+  flex: 1;
+}
+
+.ordb-cell.is-panel {
+  display: flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  line-height: 20px;
+}
+
+.ordb-cell.is-panel.is-editable {
+  cursor: pointer;
+}
+
+.ordb-cell.is-panel.is-editable:hover,
+.ordb-cell.is-panel.is-editing {
+  background: var(--bg-hover);
+}
+
+.ordb-cell.is-panel > .ordb-value {
+  flex: 1;
+}
+
+.ordb-text-editor {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  padding: 5px 8px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+  line-height: 19px;
+  resize: none;
+  overflow: hidden;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.ordb-text-editor::placeholder {
+  color: var(--text-tertiary);
+}
+
+.ordb-text-editor.is-overlay {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  z-index: 6;
+  width: calc(100% + 2px);
+  min-width: 180px;
+  min-height: calc(100% + 2px);
+  padding: 7px 8px;
+  box-shadow: var(--shadow-md);
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Table
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-table {
+  position: relative;
+  font-size: var(--fs-sm);
+}
+
+.ordb-selection-bar {
+  position: sticky;
+  top: var(--ordb-sticky-top, 0px);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.ordb-selection-bar > span {
+  margin-right: auto;
+}
+
+.ordb-thead-wrap {
+  position: sticky;
+  top: var(--ordb-sticky-top, 0px);
+  z-index: 3;
+  overflow: hidden;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.ordb-tbody-wrap {
+  overflow-x: auto;
+}
+
+.ordb-tr {
+  display: grid;
+  grid-template-columns: var(--ordb-cols);
+  min-height: var(--ordb-row-h);
+  border-bottom: 1px solid var(--divider);
+  background: var(--bg);
+}
+
+.ordb-tr:not(.is-wrap):not(.is-head):not(.is-calc) {
+  height: var(--ordb-row-h);
+}
+
+.ordb-tr.is-head {
+  border-bottom: none;
+}
+
+.ordb-tr:not(.is-head):not(.is-calc):hover {
+  background: var(--bg-hover);
+}
+
+.ordb-tr.is-selected {
+  background: var(--accent-soft);
+}
+
+.ordb-tr.is-selected:hover {
+  background: var(--accent-soft);
+}
+
+.ordb-tr.is-dragging {
+  box-shadow: var(--shadow-md);
+  background: var(--bg-elevated);
+}
+
+.ordb-tr.has-editing {
+  position: relative;
+  z-index: 2;
+}
+
+.ordb-th {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 34px;
+  padding: 0 8px;
+  border-right: 1px solid var(--divider);
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+}
+
+.ordb-th:hover,
+.ordb-th.is-open {
+  background: var(--bg-hover);
+}
+
+.ordb-th.is-dragging {
+  z-index: 5;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-md);
+}
+
+.ordb-th.is-add {
+  justify-content: flex-start;
+  border-right: none;
+  cursor: default;
+}
+
+.ordb-th.is-add:hover {
+  background: var(--bg);
+}
+
+.ordb-th-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-resize {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  bottom: 0;
+  z-index: 2;
+  width: 6px;
+  cursor: col-resize;
+}
+
+.ordb-resize:hover,
+body.ordb-resizing .ordb-th:hover .ordb-resize {
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+.ordb-gutter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  padding-right: 6px;
+}
+
+.ordb-row-grip,
+.ordb-row-check {
+  display: inline-flex;
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+
+.ordb-tr:hover .ordb-row-grip,
+.ordb-tr:hover .ordb-row-check,
+.ordb-tr.is-head:hover .ordb-row-check,
+.ordb-tr.is-selected .ordb-row-check,
+.ordb-row-check.is-visible,
+.ordb-row-check:focus-within {
+  opacity: 1;
+}
+
+.ordb-td {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  border-right: 1px solid var(--divider);
+}
+
+.ordb-td.is-filler {
+  border-right: none;
+}
+
+.ordb-td.is-editing {
+  z-index: 3;
+}
+
+.ordb-td.is-number .ordb-value,
+.ordb-td.is-unique_id .ordb-value {
+  text-align: right;
+}
+
+.ordb-td.is-checkbox .ordb-cell.is-table {
+  align-items: center;
+}
+
+.ordb-title-cell {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+
+.ordb-title-icon {
+  display: inline-flex;
+  align-items: center;
+  height: calc(var(--ordb-row-h) - 1px);
+  padding-left: 8px;
+  color: var(--text-tertiary);
+}
+
+.ordb-title-cell .ordb-cell.is-table {
+  padding-left: 6px;
+  font-weight: 500;
+}
+
+.ordb-open-btn {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+
+.ordb-tr:hover .ordb-open-btn,
+.ordb-open-btn:focus-visible {
+  opacity: 1;
+}
+
+.ordb-open-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.ordb-add-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ordb-add-row:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.ordb-add-row.is-table {
+  position: sticky;
+  left: 0;
+  max-width: 100%;
+  border-bottom: 1px solid var(--divider);
+  border-radius: 0;
+  padding-left: 58px;
+}
+
+.ordb-tr.is-calc {
+  height: 30px;
+  border-bottom: none;
+  background: transparent;
+}
+
+.ordb-td.is-calc {
+  border-right: none;
+}
+
+.ordb-calc {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  padding: 0 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  font: inherit;
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 80ms ease;
+}
+
+.ordb-tr.is-calc:hover .ordb-calc,
+.ordb-calc.is-set,
+.ordb-calc:focus-visible {
+  opacity: 1;
+}
+
+.ordb-calc:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-calc-label {
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+}
+
+.ordb-calc-value {
+  overflow: hidden;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-table-group {
+  margin-top: 6px;
+}
+
+.ordb-table-group .ordb-group-header {
+  position: sticky;
+  left: 0;
+  width: max-content;
+  max-width: 100%;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Groups (sections)
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ordb-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 2px 0;
+}
+
+.ordb-group-name {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ordb-group-label {
+  font-weight: 500;
+}
+
+.ordb-group-count {
+  color: var(--text-tertiary);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.ordb-group-add {
+  opacity: 0;
+}
+
+.ordb-group-header:hover .ordb-group-add,
+.ordb-group-add:focus-visible {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Cards (board, gallery)
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background 80ms ease, box-shadow 80ms ease;
+}
+
+.ordb-card:hover {
+  background: var(--bg-subtle);
+}
+
+.ordb-card.is-dimmed {
+  opacity: 0.35;
+}
+
+.ordb-card.is-overlay {
+  box-shadow: var(--shadow-lg);
+  transform: rotate(1.5deg);
+  cursor: grabbing;
+}
+
+.ordb-card-cover {
+  flex: none;
+  height: 120px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ordb-card.is-small .ordb-card-cover {
+  height: 84px;
+}
+
+.ordb-card.is-large .ordb-card-cover {
+  height: 180px;
+}
+
+.ordb-card-cover-icon {
+  font-size: 34px;
+  line-height: 1;
+}
+
+.ordb-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px 10px;
+  min-width: 0;
+}
+
+.ordb-card-title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.ordb-card-props {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--fs-sm);
+}
+
+.ordb-card-prop {
+  min-width: 0;
+}
+
+.ordb-card-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+
+.ordb-row-title {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.ordb-row-title > :first-child {
+  flex: none;
+  margin-top: 2px;
+}
+
+.ordb-row-title-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ordb-row-title-text.is-empty {
+  color: var(--text-tertiary);
+}
+
+.ordb-row-doc {
+  color: var(--text-tertiary);
+}
+
+.ordb-new-card {
+  padding: 9px 10px;
+  cursor: text;
+  box-shadow: 0 0 0 2px var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.ordb-new-card .ordb-input {
+  font-size: var(--fs-sm);
+}
+
+/* Board ------------------------------------------------------------------------------------ */
+
+.ordb-board {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 6px 0 16px;
+  overflow-x: auto;
+}
+
+.ordb-board-col {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  max-height: none;
+  padding: 6px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-sidebar);
+  transition: box-shadow 80ms ease;
+}
+
+.ordb-board-col.is-over {
+  box-shadow: inset 0 0 0 2px var(--accent-soft);
+}
+
+.ordb-board-col-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 2px 6px;
+}
+
+.ordb-board-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 40px;
+}
+
+.ordb-board-slot {
+  position: relative;
+}
+
+.ordb-board-slot .ordb-card {
+  cursor: grab;
+}
+
+.ordb-root.is-readonly .ordb-board-slot .ordb-card {
+  cursor: pointer;
+}
+
+.ordb-drop-line {
+  height: 3px;
+  margin: -1px 0 5px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.ordb-board-collapsed {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 42px;
+  padding: 10px 4px;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--bg-sidebar);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.ordb-board-collapsed .tag {
+  writing-mode: vertical-rl;
+  height: auto;
+  padding: 6px 0;
+  line-height: 20px;
+}
+
+.ordb-board-collapsed:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-board-hidden {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 2px;
+  width: 200px;
+  padding: 4px;
+}
+
+.ordb-board-hidden-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 4px 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.ordb-board-hidden-item:hover {
+  background: var(--bg-hover);
+  opacity: 1;
+}
+
+/* Gallery ---------------------------------------------------------------------------------- */
+
+.ordb-gallery {
+  --ordb-card-min: 240px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--ordb-card-min), 1fr));
+  gap: 12px;
+  padding: 8px 0 12px;
+}
+
+.ordb-gallery.is-small {
+  --ordb-card-min: 180px;
+}
+
+.ordb-gallery.is-large {
+  --ordb-card-min: 320px;
+}
+
+.ordb-gallery-add {
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+  border-style: dashed;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-tertiary);
+  font: inherit;
+  font-size: var(--fs-sm);
+}
+
+.ordb-gallery-add:hover {
+  color: var(--text-secondary);
+  background: var(--bg-hover);
+}
+
+/* List ------------------------------------------------------------------------------------- */
+
+.ordb-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ordb-list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 36px;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--divider);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.ordb-list-row:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-list-title {
+  flex: 1 1 auto;
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.ordb-list-row:not(.is-wrap) .ordb-list-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ordb-list-props {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 1 auto;
+  gap: 10px;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.ordb-list-row.is-wrap .ordb-list-props {
+  flex-wrap: wrap;
+}
+
+.ordb-list-prop {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 260px;
+  min-width: 0;
+}
+
+.ordb-list .ordb-new-card,
+.ordb-list .ordb-add-row {
+  margin-top: 4px;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Calendar
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-cal-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0 8px;
+}
+
+.ordb-cal-month {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.ordb-cal-month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.ordb-cal-weekhead {
+  padding: 6px 8px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+  text-align: right;
+  text-transform: capitalize;
+}
+
+.ordb-cal-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding: 4px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.ordb-cal-cell.is-outside {
+  background: var(--bg-subtle);
+}
+
+.ordb-cal-cell.is-outside .ordb-cal-num {
+  color: var(--text-tertiary);
+}
+
+.ordb-cal-cell.is-over {
+  background: var(--accent-soft);
+}
+
+.ordb-cal-cell-head {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  height: 22px;
+}
+
+.ordb-cal-num {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  border-radius: 11px;
+  font-size: var(--fs-sm);
+  line-height: 22px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.ordb-cal-cell.is-today .ordb-cal-num {
+  background: var(--danger);
+  color: var(--text-on-accent);
+  font-weight: 600;
+}
+
+.ordb-cal-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: auto;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  opacity: 0;
+}
+
+.ordb-cal-cell:hover .ordb-cal-add {
+  opacity: 1;
+}
+
+.ordb-cal-cell:has(.ordb-cal-add):hover {
+  cursor: pointer;
+}
+
+.ordb-cal-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ordb-cal-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 3px 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  user-select: none;
+}
+
+.ordb-cal-card:hover {
+  background: var(--bg-subtle);
+}
+
+.ordb-cal-card .ordb-row-title {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+
+.ordb-cal-card .ordb-row-title-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ordb-cal-card.is-dimmed {
+  opacity: 0.35;
+}
+
+.ordb-cal-card.is-overlay {
+  box-shadow: var(--shadow-lg);
+  cursor: grabbing;
+}
+
+.ordb-cal-card-prop {
+  min-width: 0;
+  color: var(--text-secondary);
+}
+
+.ordb-cal-more {
+  align-self: flex-start;
+  font-size: var(--fs-xs);
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Timeline
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-timeline {
+  min-width: 0;
+}
+
+.ordb-tl-scroller {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.ordb-tl-grid {
+  position: relative;
+  --ordb-tl-label-w: 240px;
+}
+
+.ordb-tl-head {
+  display: flex;
+  height: 50px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.ordb-tl-corner {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  flex: none;
+  width: var(--ordb-tl-label-w);
+  padding: 0 10px 6px;
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+}
+
+.ordb-tl-scale {
+  position: relative;
+  flex: none;
+}
+
+.ordb-tl-months {
+  position: relative;
+  height: 24px;
+}
+
+.ordb-tl-month {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 4px 6px;
+  border-left: 1px solid var(--divider);
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ordb-tl-days {
+  position: relative;
+  height: 26px;
+}
+
+.ordb-tl-day {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--text-tertiary);
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+.ordb-tl-day strong {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.ordb-tl-day.is-weekend {
+  background: var(--bg-subtle);
+}
+
+.ordb-tl-day.is-today strong {
+  color: var(--danger);
+}
+
+.ordb-tl-day.is-week {
+  justify-content: flex-start;
+  padding-left: 4px;
+  border-left: 1px solid var(--divider);
+  text-transform: none;
+}
+
+.ordb-tl-body {
+  position: relative;
+}
+
+.ordb-tl-today {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--danger);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.ordb-tl-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  border-bottom: 1px solid var(--divider);
+}
+
+.ordb-tl-label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex: none;
+  width: var(--ordb-tl-label-w);
+  padding: 0 10px;
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.ordb-tl-label:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-tl-label .ordb-row-title-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ordb-tl-track {
+  position: relative;
+  flex: none;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent calc(var(--ordb-day-w) - 1px),
+    var(--divider) calc(var(--ordb-day-w) - 1px),
+    var(--divider) var(--ordb-day-w)
+  );
+}
+
+.ordb-tl-track.is-schedulable {
+  cursor: copy;
+}
+
+.ordb-tl-track.is-schedulable:hover {
+  background-color: var(--bg-hover);
+}
+
+.ordb-tl-bar {
+  position: absolute;
+  top: 6px;
+  height: calc(var(--ordb-tl-row-h, 36px) - 13px);
+  display: flex;
+  align-items: center;
+  min-width: 6px;
+  padding: 0 8px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+}
+
+.ordb-tl-bar.is-editable {
+  cursor: grab;
+}
+
+.ordb-tl-bar.is-dragging {
+  box-shadow: var(--shadow-md);
+  cursor: grabbing;
+  z-index: 2;
+}
+
+.ordb-tl-bar.is-clipped-left {
+  border-left-style: dashed;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ordb-tl-bar.is-clipped-right {
+  border-right-style: dashed;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ordb-tl-bar-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ordb-tl-resize {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 7px;
+  cursor: ew-resize;
+}
+
+.ordb-tl-resize:hover {
+  background: var(--accent);
+  opacity: 0.4;
+}
+
+.ordb-tl-offscreen {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Row properties (row page / peek panel)
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-rp {
+  font-size: var(--fs-md);
+}
+
+.ordb-rp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ordb-rp-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) minmax(0, 1fr);
+  align-items: start;
+  gap: 4px;
+}
+
+.ordb-rp-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  height: 32px;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.ordb-rp-name:hover {
+  background: var(--bg-hover);
+}
+
+.ordb-rp-value {
+  min-width: 0;
+  font-size: var(--fs-sm);
+}
+
+.ordb-rp-toggle,
+.ordb-rp-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  height: 30px;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+
+.ordb-rp-toggle:hover,
+.ordb-rp-add:hover {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .ordb-toolbtn-label {
+    display: none;
+  }
+
+  .ordb-rp-row {
+    grid-template-columns: minmax(96px, 120px) minmax(0, 1fr);
+  }
+
+  .ordb-filter-rule {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ordb-formula-help {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ordb-skeleton,
+  .ordb-spin {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Wave 1: relations, rollups, bulk edit, linked views, templates, CSV, dependencies
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-relation-setup .ordb-toggle,
+.ordb-rollup-setup .ordb-select {
+  width: 100%;
+}
+
+.ordb-rollup-setup .ordb-select select,
+.ordb-bulk .ordb-select select {
+  width: 100%;
+}
+
+.ordb-rollup-setup .ordb-menu-label {
+  padding: 4px 0 0;
+}
+
+.ordb-relation-setup .ordb-btn,
+.ordb-rollup-setup .ordb-btn {
+  margin-top: 4px;
+}
+
+.ordb-relation-db {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 170px;
+  color: var(--text);
+}
+
+.ordb-toggle-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ordb-field-label {
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+}
+
+.ordb-menu-hint.is-tight {
+  padding: 0 2px;
+}
+
+.ordb-rollup-item {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-rollup-item + .ordb-rollup-item::before {
+  content: '';
+}
+
+/* Bulk edit modal */
+.ordb-bulk {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ordb-bulk .ordb-menu-label {
+  padding: 4px 0 0;
+}
+
+.ordb-bulk-editor {
+  max-height: 340px;
+  overflow: auto;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.ordb-bulk .ordb-confirm-actions {
+  margin-top: 8px;
+}
+
+/* Linked database block */
+.ordb-linked-empty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.ordb-linked-empty .ordb-btn {
+  margin-left: auto;
+}
+
+.ordb-linked-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+}
+
+.ordb-linked-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ordb-linked-picker .ordb-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.ordb-linked-picker .ordb-search-input {
+  flex: 1;
+  height: 32px;
+}
+
+.ordb-linked-picker .ordb-options-list {
+  max-height: 360px;
+  overflow: auto;
+}
+
+/* Templates */
+.ordb-new-split {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.ordb-new-split .ordb-new-btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ordb-new-split .ordb-new-caret {
+  padding: 0 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.ordb-template-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ordb-template-row .ordb-menuitem {
+  flex: 1;
+  min-width: 0;
+}
+
+.ordb-template-default {
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+}
+
+.ordb-template-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: var(--fs-sm);
+}
+
+.ordb-template-banner .ordb-option-spacer {
+  flex: 1;
+}
+
+/* CSV */
+.ordb-csv {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: var(--fs-sm);
+}
+
+.ordb-csv-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ordb-csv-table th,
+.ordb-csv-table td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--divider);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.ordb-csv-table th {
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.ordb-csv-sample {
+  max-width: 160px;
+  overflow: hidden;
+  color: var(--text-secondary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-csv-scroll {
+  max-height: 46vh;
+  overflow: auto;
+}
+
+.ordb-csv-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+/* Timeline dependencies */
+.ordb-tl-deps {
+  position: absolute;
+  top: 0;
+  left: 240px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ordb-tl-dep {
+  fill: none;
+  stroke: var(--text-tertiary);
+  stroke-width: 1.4;
+}
+
+.ordb-tl-dep.is-conflict {
+  stroke: var(--danger);
+  stroke-dasharray: 4 3;
+}
+
+.ordb-tl-dep-head {
+  fill: var(--text-tertiary);
+}
+
+.ordb-tl-dep-head.is-conflict {
+  fill: var(--danger);
+}
+
+.ordb-tl-bar.is-conflict {
+  box-shadow: 0 0 0 2px var(--danger);
+}
+
+/* Calendar: week rows with spanning bars, week view */
+.ordb-cal-weekrow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-left: 1px solid var(--border);
+}
+
+.ordb-cal-weekrow .ordb-cal-cell {
+  min-height: 112px;
+}
+
+.ordb-cal-weekrow.is-tall .ordb-cal-cell {
+  min-height: 360px;
+}
+
+.ordb-cal-spanlayer {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-auto-rows: 22px;
+  row-gap: 2px;
+  pointer-events: none;
+}
+
+.ordb-cal-span {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin: 0 4px;
+  padding: 0 6px;
+  overflow: hidden;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.ordb-cal-span:hover {
+  filter: brightness(0.97);
+}
+
+.ordb-cal-span.is-dimmed {
+  opacity: 0.4;
+}
+
+.ordb-cal-span .ordb-row-title {
+  min-width: 0;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+}
+
+.ordb-cal-span .ordb-row-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ordb-cal-span.is-continued-left {
+  margin-left: 0;
+  border-left-style: dashed;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ordb-cal-span.is-continued-right {
+  margin-right: 0;
+  border-right-style: dashed;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Nested filter groups */
+.ordb-filter-group {
+  margin: 4px 0 4px 8px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
+}
+
+.ordb-calendar.is-week .ordb-cal-month {
+  text-transform: none;
+}
+
+.ordb-filter-group-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.ordb-filter-group .ordb-filter-rules {
+  margin-bottom: 2px;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * A2 — Lieu, carte, formulaire
+ * ---------------------------------------------------------------------------------------- */
+
+/* Place values and editor */
+.ordb-place {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.ordb-place-pin {
+  flex: none;
+  color: var(--accent);
+}
+.ordb-place-pin.is-unlocated {
+  color: var(--text-tertiary);
+}
+.ordb-place-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ordb-place-editor .ordb-options-list {
+  max-height: 260px;
+  overflow-y: auto;
+}
+.ordb-place-result {
+  min-width: 0;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+/* Map view */
+.ordb-map {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ordb-map-frame {
+  position: relative;
+  /* Leaflet panes use z-index 200–1000: keep them under menus, popovers and the side panel. */
+  isolation: isolate;
+  z-index: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.ordb-map-canvas {
+  height: min(560px, 70vh);
+  min-height: 280px;
+  background: var(--bg-subtle);
+  font-family: var(--font-sans);
+}
+.ordb-root.is-inline .ordb-map-canvas {
+  height: 400px;
+}
+.ordb-map-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  background: var(--bg-subtle);
+  z-index: 1000;
+}
+.ordb-map-canvas path.ordb-map-marker {
+  fill: var(--accent);
+  stroke: var(--bg);
+}
+.ordb-map-canvas path.ordb-map-marker:hover {
+  fill: var(--accent-hover);
+}
+.ordb-map .leaflet-container {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+}
+.ordb-map .leaflet-popup-content-wrapper,
+.ordb-map .leaflet-popup-tip,
+.ordb-map .leaflet-tooltip {
+  background: var(--bg-elevated);
+  color: var(--text);
+  box-shadow: var(--shadow-md);
+}
+.ordb-map .leaflet-tooltip {
+  border-color: var(--border);
+}
+.ordb-map .leaflet-tooltip-top::before {
+  border-top-color: var(--bg-elevated);
+}
+.ordb-map .leaflet-popup-content {
+  margin: 10px 12px;
+  line-height: 1.4;
+}
+.ordb-map .leaflet-container a.leaflet-popup-close-button {
+  color: var(--text-tertiary);
+}
+.ordb-map .leaflet-bar a {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border-bottom-color: var(--border);
+}
+.ordb-map .leaflet-bar a:hover {
+  background: var(--bg-hover);
+}
+.ordb-map .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--bg-elevated) 85%, transparent);
+  color: var(--text-secondary);
+}
+.ordb-map .leaflet-control-attribution a {
+  color: var(--accent);
+}
+:root[data-theme='dark'] .ordb-map .leaflet-tile-pane {
+  /* Light raster tiles adapted to the dark theme. */
+  filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
+}
+.ordb-map-popup-title {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+.ordb-map-popup-title:hover {
+  text-decoration: underline;
+}
+.ordb-map-popup-address {
+  margin-top: 2px;
+  color: var(--text-secondary);
+}
+.ordb-map-popup-prop {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+.ordb-map-popup-name {
+  flex: none;
+  color: var(--text-tertiary);
+}
+.ordb-map-unlocated ul {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ordb-map-unlocated-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 4px 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ordb-map-unlocated-row:hover {
+  background: var(--bg-hover);
+}
+
+/* Form view */
+.ordb-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 24px;
+}
+.ordb-form > * {
+  width: 100%;
+  max-width: 640px;
+}
+.ordb-form-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ordb-segmented {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+}
+.ordb-segmented-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+}
+.ordb-segmented-item.is-active {
+  background: var(--bg-elevated);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+.ordb-form-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ordb-form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-sm);
+}
+.ordb-form-editor .ordb-form-card {
+  gap: 8px;
+  padding: 14px 16px;
+}
+.ordb-form-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ordb-form-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.ordb-form-description,
+.ordb-form-help {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  white-space: pre-wrap;
+}
+.ordb-form-question {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ordb-form-label {
+  font-weight: 600;
+}
+.ordb-form-required {
+  color: var(--danger);
+}
+.ordb-form-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+.ordb-form-input.is-date {
+  max-width: 220px;
+}
+.ordb-form-textarea {
+  height: auto;
+  min-height: 60px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  resize: vertical;
+  font: inherit;
+  line-height: 1.45;
+}
+.ordb-form-title-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: 700;
+  height: 38px;
+}
+.ordb-form-question.has-error .ordb-form-input,
+.ordb-form-question.has-error .ordb-form-rich {
+  border-color: var(--danger);
+}
+.ordb-form-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ordb-form-choice,
+.ordb-form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.ordb-form-choice input {
+  margin: 0;
+  accent-color: var(--accent);
+}
+.ordb-form-rich {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-input);
+  overflow: hidden;
+}
+.ordb-form-rich.is-disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+.ordb-form-error {
+  color: var(--danger);
+  font-size: var(--fs-sm);
+}
+.ordb-form-error.is-global {
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  background: var(--danger-soft);
+}
+.ordb-form-warning {
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--warning);
+  font-size: var(--fs-sm);
+}
+.ordb-form-closed {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+}
+.ordb-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ordb-form-done {
+  align-items: center;
+  text-align: center;
+}
+.ordb-form-done-icon {
+  color: var(--success);
+}
+.ordb-form-done-text {
+  margin: 0;
+  white-space: pre-wrap;
+}
+/* Honeypot: present for bots, invisible and unreachable for people. */
+.ordb-form-trap {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.ordb-form-edit-q {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ordb-form-edit-q-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ordb-form-edit-prop {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+.ordb-form-edit-tools {
+  display: inline-flex;
+  gap: 2px;
+}
+.ordb-form-edit-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: var(--fs-sm);
+}
+.ordb-form-section-title {
+  margin: 0;
+  font-size: var(--fs-md);
+  font-weight: 600;
+}
+.ordb-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+.ordb-form-public {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ordb-form-public .ordb-form-input {
+  flex: 1;
+  min-width: 200px;
+}
+.ordb-form.is-public {
+  padding-top: 24px;
+}
+
+/* Public forms of the database (QA-VIEW-05): toolbar badge and its list. */
+.ordb-toolbtn.ordb-public-forms-btn {
+  color: var(--accent);
+}
+.ordb-public-forms {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px;
+}
+.ordb-public-forms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ordb-public-forms-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  border-top: 1px solid var(--divider);
+}
+.ordb-public-forms-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+.ordb-public-forms-name {
+  overflow: hidden;
+  color: var(--text);
+  font-size: var(--fs-sm);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ordb-public-forms-meta {
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+}
+
+/* Number progress (bar / ring) and multi-value filter input — G1 */
+.ordb-progress-bar,
+.ordb-progress-ring {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+}
+.ordb-progress-track {
+  flex: 1 1 auto;
+  min-width: 48px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-active, rgba(127, 127, 127, 0.2));
+  overflow: hidden;
+}
+.ordb-progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+}
+.ordb-progress-ring svg {
+  flex: none;
+}
+.ordb-filter-multi {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ------------------------------------------------------------------------------------------
+ * Table grid: cell ranges, group share, large views (SPEC §5.10, vague G2)
+ * ---------------------------------------------------------------------------------------- */
+
+.ordb-table:focus {
+  outline: none;
+}
+
+body.ordb-range-dragging,
+body.ordb-range-dragging * {
+  user-select: none !important;
+  cursor: cell;
+}
+
+.ordb-td.is-range {
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+}
+
+.ordb-td.is-range::after {
+  content: '';
+  position: absolute;
+  inset: -1px 0 0 -1px;
+  z-index: 1;
+  pointer-events: none;
+  border: 0 solid var(--accent);
+}
+
+.ordb-td.rg-t::after {
+  border-top-width: 2px;
+}
+
+.ordb-td.rg-b::after {
+  border-bottom-width: 2px;
+}
+
+.ordb-td.rg-l::after {
+  border-left-width: 2px;
+}
+
+.ordb-td.rg-r::after {
+  border-right-width: 2px;
+}
+
+.ordb-td.is-active {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.ordb-selection-bar.is-range > span {
+  font-variant-numeric: tabular-nums;
+}
+
+.ordb-tr.is-calc .ordb-gutter {
+  position: relative;
+  overflow: visible;
+}
+
+.ordb-group-share {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.ordb-large-note {
+  padding: 6px 10px;
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+}
+
+.ordb-selection-bar.is-range {
+  top: auto;
+  bottom: 12px;
+  width: max-content;
+  max-width: 100%;
+  margin: 8px auto 0;
+}
+
+/* I1 — recurring row templates */
+.ordb-template-repeat {
+  margin-left: 6px;
+  color: var(--text-secondary);
+  vertical-align: -1px;
+}
+
+.ordb-recurrence {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ordb-recurrence-interval {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ordb-recurrence-interval .ordb-input {
+  width: 64px;
+}
+
+.ordb-weekdays {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.ordb-weekday {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+}
+
+.ordb-weekday.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ordb-recurrence-error {
+  margin-top: 4px;
+  color: var(--danger, var(--text-secondary));
+}
+
+.ordb-recurrence-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}

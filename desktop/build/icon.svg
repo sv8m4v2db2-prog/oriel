@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!--
+    Oriel — app icon (original artwork, AGPL-3.0-or-later like the rest of the project).
+    A bay window ("oriel") jutting out of a wall: canopy, one front pane, two angled side panes, corbel.
+    Canvas 1024×1024, macOS-style rounded square 824×824 centred (100 px margin for the system shadow).
+    The window is drawn on a 32×32 grid (same geometry as web/public/favicon.svg and the in-app logo).
+  -->
+  <defs>
+    <linearGradient id="tile" x1="0.12" y1="0" x2="0.88" y2="1">
+      <stop offset="0" stop-color="#5a96f4"/>
+      <stop offset="1" stop-color="#2352b8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="420" cy="300" r="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e3ecff"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c3d6fb"/>
+      <stop offset="1" stop-color="#e3ecff"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <rect x="100" y="100" width="824" height="824" rx="186" ry="186"/>
+    </clipPath>
+    <filter id="tileShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000000" flood-opacity="0.30"/>
+    </filter>
+  </defs>
+
+  <rect x="100" y="100" width="824" height="824" rx="186" ry="186" fill="url(#tile)" filter="url(#tileShadow)"/>
+
+  <g clip-path="url(#clip)">
+    <rect x="100" y="100" width="824" height="824" fill="url(#glow)"/>
+
+    <g transform="translate(100 100) scale(25.75)">
+      <!-- Canopy -->
+      <path d="M6.5 10 11 6.5H21L25.5 10Z" fill="#ffffff"/>
+      <!-- Side panes (receding) -->
+      <path d="M10.8 11.6 6.6 12.8V19L10.8 20Z" fill="url(#side)"/>
+      <path d="M21.2 11.6 25.4 12.8V19L21.2 20Z" fill="url(#side)"/>
+      <!-- Front pane -->
+      <path d="M11.6 11.2H20.4V20.4H11.6Z" fill="url(#front)"/>
+      <!-- Corbel -->
+      <path d="M7.5 21.6H24.5L20.2 25.6H11.8Z" fill="#ffffff"/>
+    </g>
+
+    <rect x="101.5" y="101.5" width="821" height="821" rx="185" ry="185" fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="3"/>
+  </g>
+</svg>

@@ -1,0 +1,101 @@
+/*
+ * High contrast theme (navigation module, N11). Applied on top of the light or dark theme with
+ * <html data-contrast="high">. Every text / background pair below reaches WCAG AA (4.5:1 for text,
+ * 3:1 for borders and focus rings): checked by shell/nav/contrast.test.ts, which parses this file.
+ */
+:root[data-contrast='high'] {
+  --bg: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-sidebar: #f2f3f5;
+  --bg-hover: rgba(0, 0, 0, 0.08);
+  --bg-active: rgba(0, 0, 0, 0.14);
+  --bg-subtle: #eceef1;
+  --bg-input: #ffffff;
+  --bg-overlay: rgba(0, 0, 0, 0.55);
+
+  --text: #000000;
+  --text-secondary: #24292f;
+  --text-tertiary: #474d55;
+  --text-on-accent: #ffffff;
+
+  --border: #6e7781;
+  --border-strong: #3d434a;
+  --divider: rgba(0, 0, 0, 0.45);
+
+  --accent: #0a49b5;
+  --accent-hover: #083a91;
+  --accent-soft: rgba(10, 73, 181, 0.14);
+  --danger: #a4161a;
+  --danger-soft: rgba(164, 22, 26, 0.12);
+  --success: #0b6b3a;
+  --warning: #7a4d00;
+  --focus-ring: #0a49b5;
+
+  --tag-default-fg: #000000;
+  --tag-gray-fg: #000000;
+  --tag-brown-fg: #2b190f;
+  --tag-orange-fg: #2e1906;
+  --tag-yellow-fg: #2a1c0e;
+  --tag-green-fg: #0d2419;
+  --tag-blue-fg: #0d2131;
+  --tag-purple-fg: #2b1639;
+  --tag-pink-fg: #331624;
+  --tag-red-fg: #400d0b;
+}
+
+:root[data-theme='dark'][data-contrast='high'] {
+  --bg: #000000;
+  --bg-elevated: #121316;
+  --bg-sidebar: #0b0c0e;
+  --bg-hover: rgba(255, 255, 255, 0.12);
+  --bg-active: rgba(255, 255, 255, 0.2);
+  --bg-subtle: #16171a;
+  --bg-input: #0b0c0e;
+  --bg-overlay: rgba(0, 0, 0, 0.75);
+
+  --text: #ffffff;
+  --text-secondary: #e4e6ea;
+  --text-tertiary: #b9bec6;
+  --text-on-accent: #000000;
+
+  --border: #8b929b;
+  --border-strong: #c3c8cf;
+  --divider: rgba(255, 255, 255, 0.45);
+
+  --accent: #8ab4ff;
+  --accent-hover: #a9c7ff;
+  --accent-soft: rgba(138, 180, 255, 0.22);
+  --danger: #ff8a8a;
+  --danger-soft: rgba(255, 138, 138, 0.18);
+  --success: #5fd99a;
+  --warning: #ffc164;
+  --focus-ring: #8ab4ff;
+
+  --tag-default-fg: #ffffff;
+  --tag-gray-fg: #ffffff;
+  --tag-brown-fg: #ffffff;
+  --tag-orange-fg: #ffffff;
+  --tag-yellow-fg: #ffffff;
+  --tag-green-fg: #ffffff;
+  --tag-blue-fg: #ffffff;
+  --tag-purple-fg: #ffffff;
+  --tag-pink-fg: #ffffff;
+  --tag-red-fg: #ffffff;
+}
+
+/* Visible keyboard focus everywhere, and underlined links. */
+:root[data-contrast='high'] :focus-visible {
+  outline: 2px solid var(--focus-ring) !important;
+  outline-offset: 2px;
+}
+:root[data-contrast='high'] a:not(.btn):not(.nav-item):not(.tree-row):not(.breadcrumbs__item):not(.nav-list__item) {
+  text-decoration: underline;
+}
+:root[data-contrast='high'] .tree-row.is-active,
+:root[data-contrast='high'] .nav-item.is-active {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+:root[data-contrast='high'] .btn--secondary,
+:root[data-contrast='high'] .input {
+  border-color: var(--border-strong);
+}

@@ -1,0 +1,106 @@
+{
+  "name": "@oriel/desktop",
+  "productName": "Oriel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Oriel pour macOS",
+  "author": "Oriel contributors",
+  "license": "AGPL-3.0-or-later",
+  "main": "dist/main.cjs",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && electron .",
+    "typecheck": "tsc -p tsconfig.json",
+    "icon": "node scripts/render-icon.mjs",
+    "pack": "node build.mjs --check-resources --minify && electron-builder --mac --dir --publish never",
+    "dist": "node build.mjs --check-resources --minify && electron-builder --mac --publish never",
+    "test": "node --test --import tsx \"test/*.test.ts\""
+  },
+  "devDependencies": {
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3",
+    "esbuild": "0.28.2"
+  },
+  "build": {
+    "appId": "app.oriel.desktop",
+    "productName": "Oriel",
+    "copyright": "© 2026 Contributeurs d’Oriel · Licence AGPL-3.0",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../server/dist/server.cjs",
+        "to": "server/server.cjs"
+      },
+      {
+        "from": "../web/dist",
+        "to": "web",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "asar": true,
+    "npmRebuild": false,
+    "nodeGypRebuild": false,
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "afterPack": "scripts/after-pack.cjs",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "icon": "build/icon.icns",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "identity": null,
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "darkModeSupport": true,
+      "minimumSystemVersion": "12.0",
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "extendInfo": {
+        "NSHumanReadableCopyright": "© 2026 Contributeurs d’Oriel · Licence AGPL-3.0",
+        "CFBundleDevelopmentRegion": "fr"
+      }
+    },
+    "dmg": {
+      "title": "${productName} ${version}",
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "contents": [
+        {
+          "x": 150,
+          "y": 190
+        },
+        {
+          "x": 390,
+          "y": 190,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+# Oriel — service systemd pour une installation SANS Docker (Node.js ≥ 22.13 requis).
+#
+# Installation (voir docs/DEPLOY.md, « Installation sans Docker ») :
+#   sudo useradd --system --home-dir /var/lib/oriel --shell /usr/sbin/nologin oriel
+#   sudo mkdir -p /opt/oriel && sudo cp server/dist/server.cjs /opt/oriel/
+#   sudo cp -R web/dist /opt/oriel/web
+#   sudo mkdir -p /etc/oriel && sudoedit /etc/oriel/oriel.env   # PUBLIC_URL=https://…, SIGNUP_MODE…
+#   sudo cp deploy/oriel.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now oriel
+#   journalctl -u oriel -f
+#
+# Le serveur écoute sur 127.0.0.1:3000 ; placez un reverse proxy HTTPS devant
+# (deploy/nginx.conf.example ou Caddy).
+
+[Unit]
+Description=Oriel — espace de travail collaboratif
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=oriel
+Group=oriel
+
+# Valeurs par défaut ; /etc/oriel/oriel.env (facultatif, format CLE=valeur sans ${…}) les remplace.
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3000
+Environment=DATA_DIR=/var/lib/oriel
+Environment=WEB_DIST=/opt/oriel/web
+Environment=TRUST_PROXY=true
+EnvironmentFile=-/etc/oriel/oriel.env
+
+WorkingDirectory=/var/lib/oriel
+# Adaptez le chemin de node si besoin (« command -v node »).
+ExecStart=/usr/bin/node --disable-warning=ExperimentalWarning /opt/oriel/server.cjs
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+KillSignal=SIGTERM
+
+# /var/lib/oriel, créé et attribué à l'utilisateur oriel par systemd.
+StateDirectory=oriel
+StateDirectoryMode=0750
+UMask=0027
+LimitNOFILE=65536
+
+# Durcissement
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+ProtectClock=true
+ProtectHostname=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+LockPersonality=true
+SystemCallArchitectures=native
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

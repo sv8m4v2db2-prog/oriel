@@ -1,0 +1,179 @@
+/*
+ * Oriel design tokens. Every component (shell, editor wrappers, database views) must use
+ * these variables instead of hard-coded colors so light/dark themes stay consistent.
+ * The shell sets <html data-theme="light|dark"> (resolved from the user's preference).
+ */
+:root {
+  color-scheme: light;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-mono: 'SF Mono', ui-monospace, Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --bg: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-sidebar: #f6f7f9;
+  --bg-hover: rgba(15, 23, 42, 0.055);
+  --bg-active: rgba(15, 23, 42, 0.09);
+  --bg-subtle: #f3f4f6;
+  --bg-input: #ffffff;
+  --bg-overlay: rgba(15, 23, 42, 0.38);
+
+  --text: #1f2328;
+  --text-secondary: #5f6670;
+  --text-tertiary: #9aa0a8;
+  --text-on-accent: #ffffff;
+
+  --border: #e5e7eb;
+  --border-strong: #d1d5db;
+  --divider: rgba(15, 23, 42, 0.08);
+
+  --accent: #2f6fde;
+  --accent-hover: #255ec4;
+  --accent-soft: rgba(47, 111, 222, 0.12);
+  --danger: #d93a3a;
+  --danger-soft: rgba(217, 58, 58, 0.1);
+  --success: #1f8a5b;
+  --warning: #c27c0e;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.1), 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.18), 0 2px 6px rgba(15, 23, 42, 0.08);
+
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 10px;
+
+  --sidebar-width: 260px;
+  --topbar-height: 44px;
+  --page-max-width: 760px;
+  --page-padding-x: 96px;
+
+  --fs-xs: 11.5px;
+  --fs-sm: 13px;
+  --fs-md: 14px;
+  --fs-base: 16px;
+  --fs-title: 40px;
+
+  /* Option / tag colors (select, multi_select, status) */
+  --tag-default-bg: rgba(206, 205, 202, 0.5);
+  --tag-default-fg: #37352f;
+  --tag-gray-bg: #e3e2e0;
+  --tag-gray-fg: #32302c;
+  --tag-brown-bg: #eee0da;
+  --tag-brown-fg: #442a1e;
+  --tag-orange-bg: #fadec9;
+  --tag-orange-fg: #49290e;
+  --tag-yellow-bg: #fdecc8;
+  --tag-yellow-fg: #402c1b;
+  --tag-green-bg: #dbeddb;
+  --tag-green-fg: #1c3829;
+  --tag-blue-bg: #d3e5ef;
+  --tag-blue-fg: #183347;
+  --tag-purple-bg: #e8deee;
+  --tag-purple-fg: #412454;
+  --tag-pink-bg: #f5e0e9;
+  --tag-pink-fg: #4c2337;
+  --tag-red-bg: #ffe2dd;
+  --tag-red-fg: #5d1715;
+
+  /* Callout / highlight backgrounds */
+  --bg-gray: #f1f1ef;
+  --bg-brown: #f4eeee;
+  --bg-orange: #fbecdd;
+  --bg-yellow: #fbf3db;
+  --bg-green: #edf3ec;
+  --bg-blue: #e7f3f8;
+  --bg-purple: #f6f3f9;
+  --bg-pink: #faf1f5;
+  --bg-red: #fdebec;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #191a1d;
+  --bg-elevated: #232428;
+  --bg-sidebar: #1f2023;
+  --bg-hover: rgba(255, 255, 255, 0.055);
+  --bg-active: rgba(255, 255, 255, 0.09);
+  --bg-subtle: #25262a;
+  --bg-input: #1f2023;
+  --bg-overlay: rgba(0, 0, 0, 0.55);
+
+  --text: #e8e9eb;
+  --text-secondary: #a1a6ae;
+  --text-tertiary: #6e737b;
+
+  --border: #2f3136;
+  --border-strong: #3d4046;
+  --divider: rgba(255, 255, 255, 0.08);
+
+  --accent: #5b8def;
+  --accent-hover: #74a0f5;
+  --accent-soft: rgba(91, 141, 239, 0.18);
+  --danger: #ef6b6b;
+  --danger-soft: rgba(239, 107, 107, 0.14);
+  --success: #3fb67f;
+  --warning: #e0a03a;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.3);
+
+  --tag-default-bg: rgba(255, 255, 255, 0.1);
+  --tag-default-fg: #e3e3e3;
+  --tag-gray-bg: #474747;
+  --tag-gray-fg: #e3e3e3;
+  --tag-brown-bg: #5c4840;
+  --tag-brown-fg: #f0e1d8;
+  --tag-orange-bg: #854c1d;
+  --tag-orange-fg: #fbe2cf;
+  --tag-yellow-bg: #835e33;
+  --tag-yellow-fg: #fcefcf;
+  --tag-green-bg: #2b593f;
+  --tag-green-fg: #d9efdf;
+  --tag-blue-bg: #28456c;
+  --tag-blue-fg: #d6e6f4;
+  --tag-purple-bg: #493064;
+  --tag-purple-fg: #ebdcf5;
+  --tag-pink-bg: #69314c;
+  --tag-pink-fg: #f6dbe8;
+  --tag-red-bg: #6e3630;
+  --tag-red-fg: #fbdcd8;
+
+  --bg-gray: #2b2c2f;
+  --bg-brown: #36302d;
+  --bg-orange: #3b2e22;
+  --bg-yellow: #3a3423;
+  --bg-green: #233229;
+  --bg-blue: #1f2f3b;
+  --bg-purple: #2e2738;
+  --bg-pink: #35262e;
+  --bg-red: #3a2625;
+}
+
+/* Tag helper: <span class="tag" data-color="blue">…</span> */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: var(--tag-default-bg);
+  color: var(--tag-default-fg);
+}
+.tag[data-color='gray'] { background: var(--tag-gray-bg); color: var(--tag-gray-fg); }
+.tag[data-color='brown'] { background: var(--tag-brown-bg); color: var(--tag-brown-fg); }
+.tag[data-color='orange'] { background: var(--tag-orange-bg); color: var(--tag-orange-fg); }
+.tag[data-color='yellow'] { background: var(--tag-yellow-bg); color: var(--tag-yellow-fg); }
+.tag[data-color='green'] { background: var(--tag-green-bg); color: var(--tag-green-fg); }
+.tag[data-color='blue'] { background: var(--tag-blue-bg); color: var(--tag-blue-fg); }
+.tag[data-color='purple'] { background: var(--tag-purple-bg); color: var(--tag-purple-fg); }
+.tag[data-color='pink'] { background: var(--tag-pink-bg); color: var(--tag-pink-fg); }
+.tag[data-color='red'] { background: var(--tag-red-bg); color: var(--tag-red-fg); }

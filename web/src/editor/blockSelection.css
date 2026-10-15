@@ -1,0 +1,51 @@
+/* Block selection (blockSelection.ts): highlight of the selected blocks and the rubber band. */
+
+.or-block-selection-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.or-block-selection-box {
+  position: absolute;
+  border-radius: var(--radius-sm, 4px);
+  background: var(--block-selection, rgba(35, 131, 226, 0.14));
+}
+:root[data-theme='dark'] .or-block-selection-box {
+  background: var(--block-selection, rgba(70, 145, 240, 0.24));
+}
+
+/* While blocks are selected the caret and any text highlight of the editor are hidden. */
+.or-editor-wrap.has-block-selection .ProseMirror {
+  caret-color: transparent;
+}
+.or-editor-wrap.has-block-selection .ProseMirror ::selection {
+  background: transparent;
+}
+
+.or-marquee {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  border-radius: 2px;
+  background: rgba(35, 131, 226, 0.1);
+  border: 1px solid rgba(35, 131, 226, 0.4);
+}
+:root[data-theme='dark'] .or-marquee {
+  background: rgba(70, 145, 240, 0.14);
+  border-color: rgba(110, 170, 250, 0.5);
+}
+
+body.or-marquee-active,
+body.or-marquee-active * {
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  cursor: default !important;
+}
+
+@media print {
+  .or-block-selection-layer,
+  .or-marquee {
+    display: none !important;
+  }
+}

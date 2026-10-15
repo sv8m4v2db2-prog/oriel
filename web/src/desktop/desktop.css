@@ -1,0 +1,45 @@
+/* Desktop app (macOS) — native tab bar sits above the page, so the web shell no longer reserves the
+   traffic-light area (shell.css .is-desktop rules apply when there is no tab bar). */
+.is-desktop.has-native-tabs .sidebar__header {
+  padding-left: 8px;
+}
+.is-desktop.has-native-tabs .shell.is-collapsed .topbar {
+  padding-left: 12px;
+}
+.is-desktop.has-native-tabs .auth__drag {
+  display: none;
+}
+@media (max-width: 767px) {
+  .is-desktop.has-native-tabs .topbar {
+    padding-left: 12px;
+  }
+}
+
+/* Settings › Application */
+.desktop-note {
+  margin: 4px 0 8px;
+  color: var(--text-muted, #5a6879);
+  font-size: 13px;
+}
+.desktop-error {
+  margin: 6px 0 0;
+  color: var(--danger, #b42330);
+  font-size: 13px;
+}
+.desktop-shortcut {
+  min-width: 120px;
+}
+.desktop-languages {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 6px 12px;
+  max-height: 220px;
+  margin-top: 8px;
+  overflow-y: auto;
+}
+.desktop-language {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}

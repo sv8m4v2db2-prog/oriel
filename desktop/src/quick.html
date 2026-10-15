@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"
+    />
+    <title>Recherche rapide</title>
+    <link rel="stylesheet" href="assets/quick.css" />
+    <script src="quick.js" defer></script>
+  </head>
+  <body>
+    <div class="panel">
+      <input
+        id="query"
+        type="text"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="Rechercher une page ou en créer une…"
+        aria-label="Rechercher une page"
+        maxlength="200"
+      />
+      <ul id="results" role="listbox" aria-label="Résultats"></ul>
+      <p id="message" class="message" hidden></p>
+      <footer class="hint"><span>↑ ↓ choisir</span><span>↩ ouvrir</span><span>Échap fermer</span></footer>
+    </div>
+  </body>
+</html>

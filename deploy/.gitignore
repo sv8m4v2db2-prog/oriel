@@ -1,0 +1,3 @@
+# Configuration locale et sauvegardes de l'instance (jamais dans le dépôt)
+.env
+backups/

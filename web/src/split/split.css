@@ -1,0 +1,169 @@
+/* Split view (lot E): panes side by side in the main area. */
+
+.splitv {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.splitv__pane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  min-height: 0;
+  background: var(--bg);
+}
+
+.splitv__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 6px 0 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--divider);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+/* The active pane: a discreet accent line on top of its strip. */
+.splitv__head::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: transparent;
+  transition: background 0.12s;
+}
+.splitv__pane.is-active .splitv__head {
+  color: var(--text);
+}
+.splitv__pane.is-active .splitv__head::before {
+  background: var(--accent);
+}
+.splitv__title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+.splitv__title span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.splitv__actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0.55;
+  transition: opacity 0.12s;
+}
+.splitv__pane.is-active .splitv__actions,
+.splitv__pane:hover .splitv__actions,
+.splitv__actions:focus-within {
+  opacity: 1;
+}
+
+.splitv__scroll {
+  position: relative;
+}
+
+/* Handle between two panes: a 1px line with a wider hit area. */
+.splitv__handle {
+  position: relative;
+  flex: 0 0 1px;
+  z-index: 3;
+  background: var(--divider);
+  cursor: col-resize;
+  outline: none;
+}
+.splitv__handle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  right: -4px;
+}
+.splitv__handle:hover,
+.splitv__handle:focus-visible,
+.splitv__handle:active {
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* « Agrandir » : the other panes stay mounted (their documents stay connected) but hidden. */
+.splitv.has-maximized .splitv__handle,
+.splitv.has-maximized .splitv__pane:not(.is-maximized) {
+  display: none;
+}
+.splitv.has-maximized .splitv__pane.is-maximized {
+  flex: 1 1 0%;
+}
+
+/* Narrow panes: lighter gutters and title (the width is measured per pane, not by the window). */
+.splitv__pane[data-size='m'] .page {
+  --page-x: 40px;
+}
+.splitv__pane[data-size='s'] .page {
+  --page-x: 20px;
+}
+.splitv__pane[data-size='m'] .page-header__inner {
+  padding-top: 44px;
+}
+.splitv__pane[data-size='s'] .page-header__inner {
+  padding-top: 28px;
+}
+.splitv__pane[data-size='s'] .page-title {
+  font-size: 28px;
+}
+.splitv__pane .page {
+  padding-bottom: 20vh;
+}
+
+/* Drop zones while a sidebar entry is dragged over the main area. */
+.splitv-drop {
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  transition: left 0.08s, top 0.08s, width 0.08s, height 0.08s;
+}
+.splitv-drop__label {
+  padding: 4px 10px;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--text-on-accent);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+}
+body.is-split-dragging {
+  cursor: grabbing;
+}
+
+/* Peek panel: « Ouvrir à côté » button label stays short on small widths. */
+@media (max-width: 767px) {
+  .splitv-drop {
+    display: none;
+  }
+}
+
+@media print {
+  .splitv__head,
+  .splitv__handle {
+    display: none;
+  }
+}

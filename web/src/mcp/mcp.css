@@ -1,0 +1,159 @@
+/* Settings › API et MCP */
+.mcp-settings code {
+  padding: 0 4px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-hover);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+.mcp-intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 20px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+.mcp-intro svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--accent);
+}
+.mcp-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+.mcp-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.mcp-note.is-warning {
+  background: color-mix(in srgb, var(--warning) 12%, transparent);
+  color: var(--text);
+}
+.mcp-note.is-warning svg {
+  color: var(--warning);
+}
+
+.mcp-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px;
+}
+.mcp-form .field {
+  min-width: 140px;
+}
+.mcp-form__name {
+  flex: 1;
+  min-width: 200px !important;
+}
+
+.mcp-token-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mcp-token {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--divider);
+}
+.mcp-token:last-child {
+  border-bottom: none;
+}
+.mcp-token.is-expired .mcp-token__name {
+  color: var(--text-tertiary);
+}
+.mcp-token__main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.mcp-token__name {
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.mcp-token__meta {
+  grid-column: 1;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+}
+.mcp-token__revoke {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+
+.mcp-snippets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mcp-snippet {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-subtle);
+}
+.mcp-snippet__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 6px 4px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.mcp-snippet__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+}
+.mcp-snippet__code {
+  margin: 0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.5;
+  white-space: pre;
+  user-select: all;
+}
+.mcp-created {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mcp-created .mcp-note {
+  margin-bottom: 0;
+}
+.mcp-created__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+@media (max-width: 640px) {
+  .mcp-token {
+    grid-template-columns: 1fr;
+  }
+  .mcp-token__revoke {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+  }
+}
