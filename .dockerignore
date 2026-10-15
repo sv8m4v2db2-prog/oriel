@@ -1,0 +1,31 @@
+# Contexte de build Docker : uniquement ce qui sert à construire shared/, server/ et web/.
+
+# Dépendances et artefacts locaux (réinstallés / reconstruits dans l'image)
+**/node_modules
+**/dist
+**/*.log
+**/.DS_Store
+**/.env
+**/.env.local
+**/.env.*.local
+coverage/
+
+# Données locales (ne jamais les envoyer au démon Docker)
+data/
+.data-dev/
+**/*.db
+**/*.db-wal
+**/*.db-shm
+deploy/backups/
+
+# Sans rapport avec l'image serveur
+.git/
+.github/
+docs/
+deploy/
+Dockerfile
+.dockerignore
+
+# Application macOS : seul le manifeste est requis (cohérence du package-lock.json des workspaces)
+desktop/*
+!desktop/package.json

@@ -1,0 +1,26 @@
+{
+  "name": "oriel",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Oriel \u2014 espace de travail collaboratif open-source (pages, blocs, bases de donn\u00e9es), auto-h\u00e9bergeable.",
+  "license": "AGPL-3.0-or-later",
+  "workspaces": [
+    "shared",
+    "server",
+    "web",
+    "desktop",
+    "mcp"
+  ],
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "npm run dev -w server & npm run dev -w web",
+    "build": "npm run build -w web && npm run build -w server",
+    "start": "node server/dist/server.cjs",
+    "typecheck": "npm run typecheck -w shared && npm run typecheck -w server && npm run typecheck -w web",
+    "test": "npm test -w server",
+    "desktop:dev": "npm run build && npm run dev -w desktop",
+    "desktop:dist": "npm run build && npm run dist -w desktop"
+  }
+}
