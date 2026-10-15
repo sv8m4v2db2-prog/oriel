@@ -1,0 +1,164 @@
+/* Navigation module (wave G7): sidebar shortcuts, folders, access dialogs, page statistics. */
+
+.nav-shortcut__icon {
+  flex: none;
+  color: var(--text-secondary);
+}
+.nav-shortcut__ext {
+  flex: none;
+  color: var(--text-tertiary);
+}
+.nav-shortcut[draggable='true'] {
+  cursor: pointer;
+}
+.nav-pinned__row .tree-row__title {
+  color: var(--text-secondary);
+}
+.nav-pinned__more {
+  display: block;
+  padding: 3px 8px;
+  font-size: var(--fs-sm);
+  text-align: left;
+}
+
+.nav-folder__icon {
+  flex: none;
+  color: var(--text-secondary);
+}
+.nav-folder__count {
+  margin-left: auto;
+  padding: 0 6px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+.nav-folder.drop-inside {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+/* Access dialogs */
+.nav-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.nav-effect {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+}
+.nav-effect.is-change {
+  border-color: var(--warning);
+  color: var(--text);
+}
+.nav-effect__error {
+  color: var(--danger);
+}
+
+/* Presence avatars open the profile */
+.presence__person {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.presence__person + .presence__person {
+  margin-left: -4px;
+}
+
+/* Page statistics popover */
+.nav-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: var(--fs-sm);
+}
+.nav-stats__title {
+  font-weight: 600;
+}
+.nav-stats__subtitle {
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+.nav-stats__figures {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0;
+}
+.nav-stats__figures div {
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.nav-stats__figures dt {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+.nav-stats__figures dd {
+  margin: 2px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.nav-stats__chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 56px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+.nav-stats__bar {
+  flex: 1;
+  min-height: 1px;
+  border-radius: 2px 2px 0 0;
+  background: var(--accent);
+}
+.nav-stats__note {
+  margin: 0;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+.nav-stats__people {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav-stats__person {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 4px;
+  border-radius: var(--radius-sm);
+  color: var(--text) !important;
+  text-decoration: none !important;
+}
+.nav-stats__person:hover {
+  background: var(--bg-hover);
+}
+.nav-stats__when {
+  margin-left: auto;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+/* Person mentions open the profile (collab/mentions.tsx). */
+.or-user-mention.is-link {
+  cursor: pointer;
+}
+.nav-stats__target {
+  display: inline-flex;
+}
