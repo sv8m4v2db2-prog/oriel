@@ -1,0 +1,184 @@
+/* Synced block and HTML block (editor module). Colors come from the theme tokens (light and dark). */
+
+/* --- synced block ------------------------------------------------------------------- */
+.or-synced {
+  position: relative;
+  width: 100%;
+  margin: 2px 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition: border-color 0.12s ease;
+}
+.or-synced:hover,
+.or-synced:focus-within {
+  border-color: color-mix(in srgb, var(--warning, #e8590c) 55%, transparent);
+}
+.or-synced__bar {
+  position: absolute;
+  top: -11px;
+  left: 8px;
+  right: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  user-select: none;
+}
+.or-synced:hover > .or-synced__bar,
+.or-synced:focus-within > .or-synced__bar {
+  opacity: 1;
+}
+.or-synced__bar > * {
+  pointer-events: auto;
+}
+.or-synced__spacer {
+  flex: 1;
+  pointer-events: none !important;
+}
+.or-synced__label,
+.or-synced__origin,
+.or-synced__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  white-space: nowrap;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.or-synced__label {
+  color: color-mix(in srgb, var(--warning, #e8590c) 80%, var(--text));
+  font-weight: 600;
+}
+.or-synced__origin--link {
+  color: var(--text-secondary) !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+.or-synced__origin--link:hover,
+.or-synced__btn:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+.or-synced__btn {
+  cursor: pointer;
+  color: var(--text-secondary);
+  font: inherit;
+}
+.or-synced__content {
+  padding: 6px 0 2px;
+}
+/* The nested editor sits inside a block: no page gutters of its own. */
+.or-synced__editor .bn-editor {
+  padding-inline: 28px 8px;
+  background: transparent;
+}
+/* Its root group sits inside the page's own groups: not a nested group (no indent, no guide line). */
+.or-synced__editor > .bn-editor > .bn-block-group {
+  margin-left: 0;
+}
+.or-synced__editor > .bn-editor > .bn-block-group > .bn-block-outer::before {
+  content: none !important;
+  display: none !important;
+}
+.or-synced__loading,
+.or-synced--loading {
+  display: flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+}
+.or-synced--off {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px dashed var(--border);
+  background: var(--bg-subtle);
+  color: var(--text-tertiary);
+  font-size: var(--fs-sm);
+  user-select: none;
+}
+
+/* --- HTML block ----------------------------------------------------------------------- */
+.or-html button.or-media__action {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.or-html .or-media__action:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.or-html__code {
+  border-bottom: 1px solid var(--divider);
+}
+.or-html__textarea {
+  display: block;
+  width: 100%;
+  min-height: 140px;
+  max-height: 480px;
+  padding: 10px 12px;
+  border: 0;
+  outline: none;
+  resize: vertical;
+  background: var(--bg-subtle);
+  color: var(--text);
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.5;
+  tab-size: 2;
+  user-select: text;
+}
+.or-html__error,
+.or-html__notice {
+  padding: 6px 12px;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+.or-html__error {
+  color: var(--danger, #e03131);
+}
+.or-html__gate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+.or-html__gate .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.or-html__frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  /* The frame's own document has no background: keep the block readable in dark mode. */
+  background: #fff;
+  color-scheme: light;
+}
+
+/* --- Drawing block (E14) --- */
+.or-drawing { border: 1px solid rgba(127, 127, 127, 0.3); border-radius: 6px; overflow: hidden; background: var(--or-drawing-bg, rgba(255, 255, 255, 0.04)); }
+.or-drawing__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 4px 6px; background: rgba(127, 127, 127, 0.08); }
+.or-drawing__canvas { background: #fff; display: block; width: 100%; aspect-ratio: 5 / 3; user-select: none; }
+.or-drawing__swatch { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(127, 127, 127, 0.5); cursor: pointer; padding: 0; }
+.or-drawing__swatch.is-active, .or-media__action.is-active { outline: 2px solid rgba(80, 130, 255, 0.8); outline-offset: 1px; }
+.or-drawing__dot { display: inline-block; border-radius: 50%; background: currentColor; }
