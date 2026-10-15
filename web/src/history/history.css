@@ -1,0 +1,243 @@
+/* Version history (G6): comparison and recovery of deleted blocks. */
+.hist-against {
+  display: flex;
+  white-space: nowrap;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin-right: auto;
+  margin-left: 12px;
+}
+.hist-against select {
+  max-width: 220px;
+  min-width: 0;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 6px;
+}
+.hist-caption {
+  margin: 0 0 12px;
+  font-size: var(--fs-sm);
+}
+
+.hdiff__head {
+  position: sticky;
+  top: -24px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: -24px -32px 16px;
+  padding: 12px 32px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--divider);
+}
+.hdiff__sides {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.hdiff__side {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fs-sm);
+}
+.hdiff__side-label {
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.hdiff__summary {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+.hdiff__chip,
+.hdiff__badge {
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: var(--fs-xs);
+  background: var(--tag-default-bg);
+  color: var(--tag-default-fg);
+}
+.hdiff__chip.is-added,
+.hdiff__badge.is-added {
+  background: var(--tag-green-bg);
+  color: var(--tag-green-fg);
+}
+.hdiff__chip.is-removed,
+.hdiff__badge.is-removed {
+  background: var(--tag-red-bg);
+  color: var(--tag-red-fg);
+}
+.hdiff__chip.is-modified,
+.hdiff__badge.is-modified {
+  background: var(--tag-orange-bg);
+  color: var(--tag-orange-fg);
+}
+.hdiff__chip.is-moved,
+.hdiff__badge.is-moved {
+  background: var(--tag-blue-bg);
+  color: var(--tag-blue-fg);
+}
+.hdiff__tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hdiff__toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  margin-right: auto;
+}
+.hdiff__props {
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius);
+  font-size: var(--fs-sm);
+}
+.hdiff__props h4 {
+  margin: 0 0 6px;
+  font-size: var(--fs-sm);
+}
+.hdiff__props ul {
+  margin: 0;
+  padding-left: 18px;
+}
+.hdiff__meta {
+  margin: 6px 0 0;
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+}
+.hdiff__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hdiff__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 10px;
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-sm);
+}
+.hdiff__row.is-added {
+  border-left-color: var(--tag-green-fg);
+  background: var(--tag-green-bg);
+}
+.hdiff__row.is-removed {
+  border-left-color: var(--tag-red-fg);
+  background: var(--tag-red-bg);
+}
+.hdiff__row.is-removed .hdiff__text {
+  text-decoration: line-through;
+}
+.hdiff__row.is-modified {
+  border-left-color: var(--tag-orange-fg);
+}
+.hdiff__row.is-moved:not(.is-added):not(.is-removed):not(.is-modified) {
+  border-left-color: var(--tag-blue-fg);
+}
+.hdiff__row.is-context {
+  opacity: 0.55;
+}
+.hdiff__row.is-current {
+  outline: 2px solid var(--accent);
+}
+.hdiff__check {
+  margin-top: 3px;
+}
+.hdiff__main {
+  flex: 1;
+  min-width: 0;
+}
+.hdiff__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+.hdiff__text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--fs-md);
+}
+.hdiff__text.is-code {
+  font-family: ui-monospace, monospace;
+  font-size: var(--fs-sm);
+}
+.hdiff__ins {
+  text-decoration: underline;
+  text-decoration-color: var(--tag-green-fg);
+  background: var(--tag-green-bg);
+  color: var(--tag-green-fg);
+}
+.hdiff__del {
+  text-decoration: line-through;
+  background: var(--tag-red-bg);
+  color: var(--tag-red-fg);
+}
+.hdiff__notes {
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+.hdiff__act {
+  flex-shrink: 0;
+}
+.hdiff__gap {
+  padding: 2px 10px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  border-left: 3px dotted var(--divider);
+}
+
+.hdeleted ul {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hdeleted__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-sm);
+}
+.hdeleted__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hdeleted__type,
+.hdeleted__meta {
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+.hdeleted__text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.hist-tabs {
+  flex-shrink: 0;
+}
