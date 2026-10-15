@@ -24,6 +24,17 @@ L'interface est en français. Oriel est distribué sous [licence GNU AGPL-3.0 ou
   regroupements et calculs.
 - **Vues** : tableau, Kanban, liste, galerie, calendrier, chronologie, fil d'actualité, graphiques
   (barres, courbes, anneau, nombre), tableau de bord, carte et formulaire (partageable publiquement).
+- **Formules structurées** : listes, pages et personnes comme valeurs (`map`, `filter`, `sum`,
+  `unique`…), relations parcourues sur plusieurs niveaux, ordre manuel propre à chaque vue, modèles
+  de lignes récurrents.
+- **Canevas et cartes mentales** : pages tableau blanc avec formes, connecteurs, stylo, notes et
+  cadres nommés, présentation cadre par cadre, modèles de départ (storyboard, moodboard, plan de
+  tournage, Gantt), cartes mentales créées à partir d'une liste à puces.
+- **Journal quotidien et organisation** : une page privée par jour avec un calendrier, tags d'espace,
+  propriétés de page hors des bases, collections intelligentes et vue « Toutes les pages ».
+- **Vue scindée** : deux ou trois pages côte à côte, chacune avec son éditeur en temps réel.
+- **Écriture** : notes de bas de page, auteur et date de la dernière modification de chaque bloc,
+  aperçu Typst dans les blocs de code, export d'une page en HTML autonome et en PNG.
 - **Commentaires et mentions**, boîte de réception et notifications par e-mail (immédiates ou en
   résumé quotidien).
 - **Historique des versions** avec comparaison bloc par bloc et restauration sélective, corbeille
@@ -54,7 +65,12 @@ L'interface est en français. Oriel est distribué sous [licence GNU AGPL-3.0 ou
 | ![Recherche](docs/screenshots/search.png) Recherche | ![Historique des versions](docs/screenshots/history.png) Historique des versions et comparaison |
 | ![Mode présentation](docs/screenshots/presentation.png) Mode présentation | ![Réglages de sécurité](docs/screenshots/security.png) Double authentification |
 | ![Page en thème sombre](docs/screenshots/dark-page.png) Thème sombre | ![Kanban en thème sombre](docs/screenshots/dark-board.png) Thème sombre |
-| ![Tableau de bord en thème sombre](docs/screenshots/dark-dashboard.png) Thème sombre | |
+| ![Tableau de bord en thème sombre](docs/screenshots/dark-dashboard.png) Thème sombre | ![Formules structurées](docs/screenshots/formulas.png) Formules structurées |
+| ![Canevas avec le modèle storyboard](docs/screenshots/canvas-storyboard.png) Canevas | ![Carte mentale](docs/screenshots/canvas-mindmap.png) Carte mentale |
+| ![Calendrier du journal](docs/screenshots/journal.png) Journal quotidien | ![Une journée du journal](docs/screenshots/journal-day.png) Une journée du journal |
+| ![Toutes les pages et tags](docs/screenshots/all-pages.png) Toutes les pages et tags | ![Vue scindée](docs/screenshots/split-view.png) Vue scindée |
+| ![Notes de bas de page](docs/screenshots/footnotes.png) Notes de bas de page | ![Aperçu Typst](docs/screenshots/typst.png) Aperçu Typst |
+| ![Auteur et date d'un bloc](docs/screenshots/block-meta.png) Auteur et date d'un bloc | |
 
 Les captures montrent un espace de démonstration fictif.
 

@@ -24,6 +24,16 @@ The interface is in French. Oriel is licensed under the [GNU AGPL-3.0 or later](
   calculations.
 - **Views**: table, board, list, gallery, calendar, timeline, feed, charts (bars, lines, donut,
   number), dashboard, map and form (shareable publicly).
+- **Structured formulas**: lists, pages and people as values (`map`, `filter`, `sum`, `unique`…),
+  relations followed over several levels, manual row order per view, recurring row templates.
+- **Canvas and mind maps**: whiteboard pages with shapes, connectors, pen, notes and named frames,
+  frame-by-frame presentation, starter templates (storyboard, moodboard, shooting plan, Gantt), mind
+  maps built from a bulleted list.
+- **Daily journal and organization**: one private page per day with a calendar, workspace tags,
+  page properties outside databases, smart collections and an "all pages" view.
+- **Split view**: two or three pages side by side, each with its own real-time editor.
+- **Writing extras**: footnotes, who created and last changed each block, Typst preview in code
+  blocks, standalone HTML and PNG export of a page.
 - **Comments and mentions**, an inbox, and e-mail notifications (immediate or daily digest).
 - **Version history** with block-level comparison and selective restore, trash (30 days).
 - **Search** across titles and contents, quick switcher, favorites, teamspaces, private pages.
@@ -50,7 +60,12 @@ The interface is in French. Oriel is licensed under the [GNU AGPL-3.0 or later](
 | ![Search](docs/screenshots/search.png) Search | ![Version history](docs/screenshots/history.png) Version history with comparison |
 | ![Presentation mode](docs/screenshots/presentation.png) Presentation mode | ![Security settings](docs/screenshots/security.png) Two-factor authentication |
 | ![Dark theme page](docs/screenshots/dark-page.png) Dark theme | ![Dark theme board](docs/screenshots/dark-board.png) Dark theme |
-| ![Dark theme dashboard](docs/screenshots/dark-dashboard.png) Dark theme | |
+| ![Dark theme dashboard](docs/screenshots/dark-dashboard.png) Dark theme | ![Structured formulas](docs/screenshots/formulas.png) Structured formulas |
+| ![Canvas with a storyboard template](docs/screenshots/canvas-storyboard.png) Canvas | ![Mind map](docs/screenshots/canvas-mindmap.png) Mind map |
+| ![Daily journal calendar](docs/screenshots/journal.png) Daily journal | ![A journal day](docs/screenshots/journal-day.png) A journal day |
+| ![All pages with tags](docs/screenshots/all-pages.png) All pages and tags | ![Split view](docs/screenshots/split-view.png) Split view |
+| ![Footnotes](docs/screenshots/footnotes.png) Footnotes | ![Typst preview](docs/screenshots/typst.png) Typst preview |
+| ![Block author and date](docs/screenshots/block-meta.png) Block author and date | |
 
 The screenshots show a fictional demo workspace.
 
