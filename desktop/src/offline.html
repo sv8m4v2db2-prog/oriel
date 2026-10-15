@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Oriel</title>
+    <link rel="stylesheet" href="assets/pages.css" />
+    <script src="offline.js" defer></script>
+  </head>
+  <body>
+    <div class="titlebar" aria-hidden="true"></div>
+
+    <main class="status-main">
+      <!-- Local server starting -->
+      <section class="status-card view" id="view-starting" hidden>
+        <div class="spinner" role="progressbar" aria-label="Démarrage en cours"></div>
+        <h1>Démarrage de votre espace local…</h1>
+        <p class="text">Le serveur Oriel intégré se prépare, cela ne prend que quelques secondes.</p>
+      </section>
+
+      <!-- Server unreachable -->
+      <section class="status-card view" id="view-offline" hidden>
+        <svg class="illustration" viewBox="0 0 160 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="o-top" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffffff" />
+              <stop offset="1" stop-color="#d7eeff" />
+            </linearGradient>
+          </defs>
+          <!-- signal arcs, the outer one broken -->
+          <g fill="none" stroke="#4b92e5" stroke-width="5" stroke-linecap="round">
+            <path d="M68 40a17 17 0 0 1 24 0" opacity="0.9" />
+            <path d="M58 30a31 31 0 0 1 17-8.5" opacity="0.55" />
+            <path d="M85 21.5a31 31 0 0 1 17 8.5" opacity="0.55" />
+          </g>
+          <circle cx="80" cy="50" r="4" fill="#4b92e5" />
+          <!-- small ice floe -->
+          <path d="M40 82 L80 98 L80 108 L40 92 Z" fill="#a9d8f5" />
+          <path d="M80 98 L120 82 L120 92 L80 108 Z" fill="#5b9fd8" />
+          <path d="M40 82 L80 66 L120 82 L80 98 Z" fill="url(#o-top)" stroke="#bcdcf5" stroke-width="1" />
+          <path d="M22 106 H56 M104 106 H138" stroke="#4b92e5" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round" />
+        </svg>
+        <h1 id="offline-title">Serveur injoignable</h1>
+        <p class="text" id="offline-text">
+          Oriel n’arrive pas à joindre <strong id="server-label">le serveur</strong>. Vérifiez votre
+          connexion internet ou l’état du serveur.
+        </p>
+        <p class="error-detail" id="error-detail" hidden>
+          <span id="error-message"></span>
+          <code id="error-code"></code>
+        </p>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="retry-btn">Réessayer</button>
+          <button type="button" class="btn btn-secondary" id="change-btn">Changer de serveur</button>
+        </div>
+        <p class="countdown" id="countdown" aria-live="polite"></p>
+        <p class="hint" id="hint">
+          Les modifications faites hors ligne restent enregistrées sur ce Mac et seront synchronisées dès le
+          retour de la connexion.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

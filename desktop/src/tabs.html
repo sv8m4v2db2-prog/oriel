@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"
+    />
+    <title>Onglets</title>
+    <link rel="stylesheet" href="assets/tabs.css" />
+    <script src="tabs.js" defer></script>
+  </head>
+  <body>
+    <div class="bar" id="bar" role="tablist" aria-label="Onglets">
+      <div class="tabs" id="tabs"></div>
+      <button class="new" id="new" type="button" title="Nouvel onglet (⌘T)" aria-label="Nouvel onglet">+</button>
+    </div>
+  </body>
+</html>

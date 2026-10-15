@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bienvenue dans Oriel</title>
+    <link rel="stylesheet" href="assets/pages.css" />
+    <script src="setup.js" defer></script>
+  </head>
+  <body>
+    <div class="titlebar" aria-hidden="true"></div>
+
+    <main class="setup-main">
+      <header class="hero">
+        <img class="hero-logo" src="assets/logo.svg" alt="" width="64" height="64" />
+        <h1 id="title">Bienvenue dans Oriel</h1>
+        <p class="lede" id="lede">Choisissez où vivront vos pages. Vous pourrez changer d’avis à tout moment.</p>
+      </header>
+
+      <section class="choices">
+        <article class="card" id="card-remote" aria-labelledby="remote-title">
+          <span class="badge" id="badge-remote" hidden>Actuel</span>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3.5" y="4" width="17" height="6.5" rx="2" />
+              <rect x="3.5" y="13.5" width="17" height="6.5" rx="2" />
+              <path d="M7.5 7.25h.01M7.5 16.75h.01M11 7.25h5.5M11 16.75h5.5" />
+            </svg>
+          </div>
+          <h2 id="remote-title">Se connecter à un serveur</h2>
+          <p>Rejoignez l’espace de votre équipe, hébergé sur votre propre serveur Oriel.</p>
+
+          <form id="remote-form" novalidate>
+            <label for="server-url">Adresse du serveur</label>
+            <div class="field-row">
+              <input
+                id="server-url"
+                type="url"
+                inputmode="url"
+                placeholder="https://notes.mondomaine.fr"
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+                required
+              />
+              <button type="button" class="btn btn-secondary" id="test-btn">Tester</button>
+            </div>
+            <div class="recent" id="recent" hidden aria-label="Serveurs récents"></div>
+            <div class="status" id="remote-status" role="status" aria-live="polite"></div>
+            <div class="spacer"></div>
+            <button type="submit" class="btn btn-primary btn-block" id="connect-btn">Se connecter</button>
+          </form>
+        </article>
+
+        <article class="card" id="card-local" aria-labelledby="local-title">
+          <span class="badge" id="badge-local" hidden>Actuel</span>
+          <div class="card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="5" width="16" height="11" rx="2" />
+              <path d="M2.5 19h19" />
+              <path d="M9.5 10.5 11.25 12.25 14.75 8.75" />
+            </svg>
+          </div>
+          <h2 id="local-title">Mode local</h2>
+          <p>Oriel fonctionne entièrement sur ce Mac, sans compte ni connexion réseau. Idéal pour un usage personnel.</p>
+          <ul class="facts">
+            <li><span>Données enregistrées dans <code id="data-dir">~/Library/Application Support/Oriel/data</code></span></li>
+            <li><span>Rien ne quitte cet ordinateur</span></li>
+            <li><span>Fonctionne hors ligne, en permanence</span></li>
+          </ul>
+          <div class="status" id="local-status" role="status" aria-live="polite"></div>
+          <div class="spacer"></div>
+          <button type="button" class="btn btn-secondary btn-block" id="local-btn">Utiliser le mode local</button>
+        </article>
+      </section>
+
+      <footer class="setup-footer">
+        <span id="footer-hint">Pour revenir ici plus tard : menu Oriel › Changer de serveur…</span>
+        <button type="button" class="btn btn-link" id="cancel-btn" hidden>Annuler <kbd>Échap</kbd></button>
+      </footer>
+    </main>
+  </body>
+</html>
